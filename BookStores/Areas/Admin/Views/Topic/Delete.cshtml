@@ -1,0 +1,45 @@
+﻿@model BookStores.Models.Topic
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <div class="card" style="margin-top: 75px;">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin chủ đề muốn xóa</h4>
+                <div class="table-responsive">
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>Mã chủ đề:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.codeTopic)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tên danh mục:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.nameTopic)
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

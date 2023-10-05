@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="10158ca8d7ab48cfa32f342e69018fd4" Name="Diagram1">
+        <EntityTypeShape EntityType="dbBookStoreModel.Admin" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Book" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Customer" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Order" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Topic" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbBookStoreModel.FK_Books_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBookStoreModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Publisher" Width="1.5" PointX="8.375" PointY="4.875" />
+        <AssociationConnector Association="dbBookStoreModel.FK_Books_Publisher" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Author" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="dbBookStoreModel.WriteBook" Width="1.5" PointX="8.25" PointY="8.5" />
+        <AssociationConnector Association="dbBookStoreModel.FK_WriteBook_Author" />
+        <AssociationConnector Association="dbBookStoreModel.FK_WriteBook_Books" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

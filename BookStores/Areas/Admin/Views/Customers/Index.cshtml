@@ -1,0 +1,132 @@
+﻿@model PagedList.IPagedList<BookStores.Models.Customer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+<div class="card" style="margin-top: 75px;">
+    <div class="card-body">
+        <div class="row m-b-30">
+            @using (Html.BeginForm("Index", "Customers", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="col-lg-8">
+                    <div class="d-md-flex">
+
+                        <div class="m-b-10 m-r-15">
+                            <input type="Text" class="form-control" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên khách hàng cần tìm">
+                        </div>
+                        <div class="m-b-10">
+                            <input type="submit" class="btn btn-danger" value="Tìm">
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="col-lg-4 text-right">
+                <a href="@Url.Action("Create", "Customers")">
+                    <button class="btn btn-primary btn-tone m-r-5">
+                        <i class="anticon anticon-plus-circle m-r-5"></i>
+                        Thêm mới khách hàng
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">@Html.ActionLink("Tên khách hàng", "Index", new { sortProperty = "nameCustomer", sortOrder = ViewBag.SortOrder, searchString = ViewBag.Keyword, customerid = ViewBag.Subject })</th>
+                        <th scope="col">Mã khách hàng</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Mật khẩu</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">@Html.ActionLink("Ngày sinh", "Index", new { sortProperty = "birthDay", sortOrder = ViewBag.SortOrder, searchString = ViewBag.Keyword, customerid = ViewBag.Subject })</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>
+                                    #@i
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="m-b-0 m-l-10">@item.nameCustomer</h6>
+                                    </div>
+                                </td>
+                                <td>@item.codeCustomer</td>
+                                <td>@item.userName</td>
+                                <td>@item.passWord</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div>@item.email</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div>@item.address</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div>@item.phone</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div>@string.Format("{0:dd-MM-yyyy}", item.birthDay)</div>
+                                    </div>
+                                </td>
+
+
+                                <td>
+                                    <a href="/Admin/Customers/Details?id=@item.idCustomer">
+                                        <button class="btn btn-info btn-tone m-r-5">Xem</button>
+                                    </a> |
+                                    <a href="/Admin/Customers/Edit?id=@item.idCustomer">
+                                        <button class="btn btn-success btn-tone m-r-5">Sửa</button>
+                                    </a> |
+                                    <a href="/Admin/Customers/Delete?id=@item.idCustomer">
+                                        <button class="btn btn-danger btn-tone m-r-5">Xóa</button>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }
+                    }
+                </thead>
+            </table>
+        </div>
+        <!-- Thêm mã phân trang -->
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+                {
+                    <p>
+                        Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.Size, new { @onchange = "this.form.submit();", @class = "Product-select", @style = "width: 70px;" })
+                    </p>
+
+                    @Html.Hidden("page", (object)ViewBag.Page)
+                    @Html.Hidden("sortProperty", (object)ViewBag.SortProperty)
+                    @Html.Hidden("sortOrder", (object)ViewBag.SortOrder)
+                    @Html.Hidden("searchString", (object)ViewBag.Keyword)
+                    @Html.Hidden("categoryID", (object)ViewBag.Subject)
+                }
+            </div>
+            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+                <h5 class="text-dark font-weight-semibold" style="margin-right: 20px">Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h5>
+            </div>
+        </div>
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.CurrentSize, sortProperty = ViewBag.SortProperty, sortOrder = ViewBag.SortOrder, searchString = ViewBag.Keyword }))
+        <!-- Kết thúc -->

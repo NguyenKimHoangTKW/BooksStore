@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-blue">
+                            <i class="anticon anticon-book"></i>
+
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalBook</h2>
+                            <p class="m-b-0 text-muted">Tổng số sách hiện có</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-red">
+                            <i class="anticon anticon-team"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalCustomer</h2>
+                            <p class="m-b-0 text-muted">Tổng số khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-user"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalAuthor </h2>
+                            <p class="m-b-0 text-muted">Tổng số tác giả</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+</div>
+
+
+
+
+

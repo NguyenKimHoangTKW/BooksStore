@@ -1,0 +1,95 @@
+﻿@model PagedList.IPagedList<BookStores.Models.Topic>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Chủ đề";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+@using (Html.BeginForm("Index", "Topic", FormMethod.Get, new { @class = "form-inline" }))
+{
+
+    <div class="card-body">
+        <h4>Tên chủ đề</h4>
+        <div class="m-t-25" style="max-width: 500px">
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <input type="Text" class="form-control" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập chủ đề cần tìm">
+                        <input type="submit" class="btn btn-danger" value="Tìm">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+}
+<a href="@Url.Action("Create", "Topic")">
+    <button class="btn btn-primary btn-tone m-r-5" style="float: right;">Thêm chủ đề</button>
+</a>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã chủ đề</th>
+                <th scope="col">@Html.ActionLink("Tên chủ đề", "Index", new { sortProperty = "nameTopic", sortOrder = ViewBag.SortOrder, searchString = ViewBag.Keyword, topicid = ViewBag.Subject })</th>
+              
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">#@i</th>
+                        <td>@item.codeTopic</td>
+                        <td>@item.nameTopic</td>
+                        <td>
+                            <a href="/Admin/Topic/Details?id=@item.idTopic">
+                                <button class="btn btn-info btn-tone m-r-5">Xem</button>
+                            </a> |
+                            <a href="/Admin/Topic/Edit?id=@item.idTopic">
+                                <button class="btn btn-success btn-tone m-r-5">Sửa</button>
+                            </a> |
+                            <a href="/Admin/Topic/Delete?id=@item.idTopic">
+                                <button class="btn btn-danger btn-tone m-r-5">Xóa</button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>
+
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+        @using (Html.BeginForm("Index", "Topic", FormMethod.Get))
+        {
+            <p>
+                Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.Size, new { @onchange = "this.form.submit();", @class = "ProductCategories-select", @style = "width: 70px;" })
+            </p>
+
+            @Html.Hidden("page", (object)ViewBag.Page)
+            @Html.Hidden("sortProperty", (object)ViewBag.SortProperty)
+            @Html.Hidden("sortOrder", (object)ViewBag.SortOrder)
+            @Html.Hidden("searchString", (object)ViewBag.Keyword)
+            @Html.Hidden("categoryID", (object)ViewBag.Subject)
+        }
+    </div>
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+        <h5 class="text-dark font-weight-semibold" style="margin-right: 20px">Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h5>
+    </div>
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.CurrentSize, sortProperty = ViewBag.SortProperty, sortOrder = ViewBag.SortOrder, searchString = ViewBag.Keyword }))
+<!-- Kết thúc -->
