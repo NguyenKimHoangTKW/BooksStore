@@ -88,16 +88,13 @@
                                 </td>
 
 
-                                <td>
-                                    <a href="/Admin/Customers/Details?id=@item.idCustomer">
-                                        <button class="btn btn-info btn-tone m-r-5">Xem</button>
-                                    </a> |
-                                    <a href="/Admin/Customers/Edit?id=@item.idCustomer">
-                                        <button class="btn btn-success btn-tone m-r-5">Sửa</button>
-                                    </a> |
-                                    <a href="/Admin/Customers/Delete?id=@item.idCustomer">
-                                        <button class="btn btn-danger btn-tone m-r-5">Xóa</button>
-                                    </a>
+                                <td class="text-right">
+                                    <button class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                        <a href="/Admin/Customers/Edit?id=@item.idCustomer"><i class="anticon anticon-edit"></i></a>
+                                    </button>
+                                    <button class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                        <a href="/Admin/Customers/Delete?id=@item.idCustomer"><i class="anticon anticon-delete"></i>
+                                    </button>
                                 </td>
                             </tr>
 
