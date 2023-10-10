@@ -29,14 +29,14 @@ namespace BookStores.Models
         public System.DateTime updateDay { get; set; }
         public int quantity { get; set; }
         public double price { get; set; }
-        public int idTopic { get; set; }
+        public int idBookCat { get; set; }
         public int idPublisher { get; set; }
     
-        public virtual Topic Topic { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Publisher Publisher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WriteBook> WriteBooks { get; set; }
+        public virtual BookCategory BookCategory { get; set; }
     }
 }

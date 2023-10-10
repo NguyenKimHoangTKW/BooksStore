@@ -162,6 +162,9 @@
     <Compile Include="Models\Book.cs">
       <DependentUpon>BooksStoresModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookCategory.cs">
+      <DependentUpon>BooksStoresModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BooksStoresModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

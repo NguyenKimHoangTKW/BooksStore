@@ -14,22 +14,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Books">
-      <EntityTypeMapping TypeName="dbBookStoreModel.Book">
-        <MappingFragment StoreEntitySet="Books">
-          <ScalarProperty Name="idBooks" ColumnName="idBooks" />
-          <ScalarProperty Name="codeBooks" ColumnName="codeBooks" />
-          <ScalarProperty Name="nameBooks" ColumnName="nameBooks" />
-          <ScalarProperty Name="describe" ColumnName="describe" />
-          <ScalarProperty Name="Thumb" ColumnName="Thumb" />
-          <ScalarProperty Name="updateDay" ColumnName="updateDay" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="idTopic" ColumnName="idTopic" />
-          <ScalarProperty Name="idPublisher" ColumnName="idPublisher" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="dbBookStoreModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -61,15 +45,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Topics">
-      <EntityTypeMapping TypeName="dbBookStoreModel.Topic">
-        <MappingFragment StoreEntitySet="Topic">
-          <ScalarProperty Name="idTopic" ColumnName="idTopic" />
-          <ScalarProperty Name="codeTopic" ColumnName="codeTopic" />
-          <ScalarProperty Name="nameTopic" ColumnName="nameTopic" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -120,6 +95,41 @@
           <ScalarProperty Name="nameCustomer" ColumnName="nameCustomer" />
           <ScalarProperty Name="codeCustomer" ColumnName="codeCustomer" />
           <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="dbBookStoreModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="idPublisher" ColumnName="idPublisher" />
+          <ScalarProperty Name="idBookCat" ColumnName="idBookCat" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="updateDay" ColumnName="updateDay" />
+          <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+          <ScalarProperty Name="describe" ColumnName="describe" />
+          <ScalarProperty Name="nameBooks" ColumnName="nameBooks" />
+          <ScalarProperty Name="codeBooks" ColumnName="codeBooks" />
+          <ScalarProperty Name="idBooks" ColumnName="idBooks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="dbBookStoreModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="nameTopic" ColumnName="nameTopic" />
+          <ScalarProperty Name="codeTopic" ColumnName="codeTopic" />
+          <ScalarProperty Name="idTopic" ColumnName="idTopic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookCategories">
+      <EntityTypeMapping TypeName="dbBookStoreModel.BookCategory">
+        <MappingFragment StoreEntitySet="BookCategory">
+          <ScalarProperty Name="nameBookCat" ColumnName="nameBookCat" />
+          <ScalarProperty Name="idTopic" ColumnName="idTopic" />
+          <ScalarProperty Name="codeBookCat" ColumnName="codeBookCat" />
+          <ScalarProperty Name="idBookCat" ColumnName="idBookCat" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

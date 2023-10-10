@@ -19,7 +19,7 @@ namespace BookStores.Models
         public int quantity { get; set; }
         public double price { get; set; }
     
-        public virtual Book Book { get; set; }
         public virtual Order Order { get; set; }
+        public virtual Book Book { get; set; }
     }
 }

@@ -12,19 +12,21 @@ namespace BookStores.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Topic
+    public partial class BookCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Topic()
+        public BookCategory()
         {
-            this.BookCategories = new HashSet<BookCategory>();
+            this.Books = new HashSet<Book>();
         }
     
+        public int idBookCat { get; set; }
+        public string codeBookCat { get; set; }
         public int idTopic { get; set; }
-        public string codeTopic { get; set; }
-        public string nameTopic { get; set; }
+        public string nameBookCat { get; set; }
     
+        public virtual Topic Topic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookCategory> BookCategories { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

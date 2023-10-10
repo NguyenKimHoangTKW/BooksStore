@@ -35,7 +35,7 @@ namespace BookStores.Controllers
         }
         public ActionResult BooksByTopic(int id)
         {
-            var book = from s in db.Books where s.idTopic == id select s;
+            var book = from s in db.Books where s.idBookCat == id select s;
             return View(book);
         }
     }

@@ -22,7 +22,7 @@ namespace BookStores.Areas.Admin.Controllers
         {
             ViewBag.Keyword = searchString;
             ViewBag.Subject = topicid;
-            var topic = db.Topics.Include(p => p.Books);
+            var topic = db.Topics.Include(p => p.BookCategories);
 
             if (!String.IsNullOrEmpty(searchString))
                 topic = topic.Where(b => b.nameTopic.Contains(searchString));

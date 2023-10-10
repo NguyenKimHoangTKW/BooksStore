@@ -23,15 +23,15 @@ namespace BookStores.Areas.Admin.Controllers
         {
             ViewBag.Keyword = searchString;
             ViewBag.Subject = bookid;
-            var book = db.Books.Include(p => p.Publisher).Include(p => p.OrderDetails).Include(p => p.WriteBooks).Include(p => p.Topic);
+            var book = db.Books.Include(p => p.Publisher).Include(p => p.OrderDetails).Include(p => p.WriteBooks).Include(p => p.BookCategory);
 
             if (!String.IsNullOrEmpty(searchString))
                 book = book.Where(b => b.nameBooks.Contains(searchString));
 
             if (bookid != 0)
-                book = book.Where(c => c.idTopic == bookid);
+                book = book.Where(c => c.idBookCat == bookid);
 
-            ViewBag.bookid = new SelectList(db.Topics, "idTopic", "nameTopic");
+            ViewBag.bookid = new SelectList(db.BookCategories, "idBookCat", "nameBookCat");
 
             if (sortOrder == "asc") ViewBag.SortOrder = "desc";
             if (sortOrder == "desc") ViewBag.SortOrder = "";
@@ -104,7 +104,7 @@ namespace BookStores.Areas.Admin.Controllers
         // GET: Admin/Books/Create
         public ActionResult Create()
         {
-            ViewBag.idTopic = new SelectList(db.Topics, "idTopic", "nameTopic");
+            ViewBag.idBookCat = new SelectList(db.BookCategories, "idBookCat", "nameBookCat");
             ViewBag.idPublisher = new SelectList(db.Publishers, "idPublisher", "namePublisher");
             return View();
         }
@@ -139,7 +139,7 @@ namespace BookStores.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Vui lòng chọn một tệp ảnh.");
                 }
             }
-            ViewBag.idTopic = new SelectList(db.Topics, "idTopic", "nameTopic", book.idTopic);
+            ViewBag.idBookCat = new SelectList(db.BookCategories, "idBookCat", "nameBookCat", book.idBookCat);
             ViewBag.idPublisher = new SelectList(db.Publishers, "idPublisher", "namePublisher", book.idPublisher);
             return View(book);
         }
@@ -168,7 +168,7 @@ namespace BookStores.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idTopic = new SelectList(db.Topics, "idTopic", "nameTopic", book.idTopic);
+            ViewBag.idBookCat = new SelectList(db.Topics, "idBookCat", "nameBookCat", book.idBookCat);
             ViewBag.idPublisher = new SelectList(db.Publishers, "idPublisher", "namePublisher", book.idPublisher);
             return View(book);
         }
@@ -211,7 +211,7 @@ namespace BookStores.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.idTopic = new SelectList(db.Topics, "idTopic", "nameTopic", book.idTopic);
+            ViewBag.idBookCat = new SelectList(db.BookCategories, "idBookCat", "nameBookCat", book.idBookCat);
             ViewBag.idPublisher = new SelectList(db.Publishers, "idPublisher", "namePublisher", book.idPublisher);
             return View(book);
         }
