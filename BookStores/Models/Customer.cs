@@ -29,6 +29,7 @@ namespace BookStores.Models
         public string address { get; set; }
         public string phone { get; set; }
         public System.DateTime birthDay { get; set; }
+        public Nullable<System.DateTime> creDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

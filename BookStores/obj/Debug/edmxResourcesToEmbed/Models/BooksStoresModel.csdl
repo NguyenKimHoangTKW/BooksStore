@@ -31,21 +31,6 @@
     <NavigationProperty Name="Publisher" Relationship="dbBookStoreModel.FK_Books_Publisher" FromRole="Book" ToRole="Publisher" />
     <NavigationProperty Name="WriteBooks" Relationship="dbBookStoreModel.FK_WriteBook_Books" FromRole="Book" ToRole="WriteBook" />
   </EntityType>
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="idCustomer" />
-    </Key>
-    <Property Name="idCustomer" Type="Int32" Nullable="false" />
-    <Property Name="codeCustomer" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="nameCustomer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
-  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="idOrder" />
@@ -57,8 +42,8 @@
     <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="idCustomer" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+    <NavigationProperty Name="Customer" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -115,18 +100,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="idCustomer" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="idCustomer" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OrderDetail_Order">
     <End Role="Order" Type="Self.Order" Multiplicity="1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -142,7 +115,6 @@
   <EntityContainer Name="dbBookStoreEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="Books" EntityType="Self.Book" />
-    <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -154,10 +126,6 @@
     <AssociationSet Name="FK_OrderDetail_Books" Association="Self.FK_OrderDetail_Books">
       <End Role="Books" EntitySet="Books" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
       <End Role="Order" EntitySet="Orders" />
@@ -177,6 +145,11 @@
     <AssociationSet Name="FK_WriteBook_Books" Association="dbBookStoreModel.FK_WriteBook_Books">
       <End Role="Book" EntitySet="Books" />
       <End Role="WriteBook" EntitySet="WriteBooks" />
+    </AssociationSet>
+    <EntitySet Name="Customers" EntityType="dbBookStoreModel.Customer" />
+    <AssociationSet Name="FK_Order_Customer" Association="dbBookStoreModel.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Publisher">
@@ -247,6 +220,34 @@
       </Principal>
       <Dependent Role="WriteBook">
         <PropertyRef Name="idBooks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" Nullable="false" />
+    <Property Name="codeCustomer" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+    <Property Name="nameCustomer" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="passWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="creDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Orders" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Order_Customer">
+    <End Type="dbBookStoreModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="dbBookStoreModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idCustomer" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

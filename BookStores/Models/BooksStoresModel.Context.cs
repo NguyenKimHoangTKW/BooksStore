@@ -27,7 +27,6 @@ namespace BookStores.Models
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -35,5 +34,6 @@ namespace BookStores.Models
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<WriteBook> WriteBooks { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

@@ -51,6 +51,7 @@
     <Property Name="address" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="birthDay" Type="date" Nullable="false" />
+    <Property Name="creDate" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="Order">
     <Key>

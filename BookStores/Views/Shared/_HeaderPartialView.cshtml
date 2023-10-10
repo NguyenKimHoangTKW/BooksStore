@@ -1,0 +1,74 @@
+﻿@{ var usercustomer = Session["Customer"] as BookStores.Models.Customer; }
+<div class="evo-header container">
+    <div class="evo-header-logo">
+        <a class="d-sm-inline-block d-lg-none header-action__link header-action_clicked" href="javascript:void(0)" id="trigger-mobile" aria-label="Menu" title="Menu">
+            <span class="box-icon">
+                <span class="bar"></span>
+                <span class="box-icon--close">
+                    <svg viewBox="0 0 19 19"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z" fill-rule="evenodd"></path></svg>
+                </span>
+            </span>
+        </a>
+        <a href="@Url.Action("Index","BookStore")" class="logo-wrapper" title="Book Store">
+            <picture>
+                <source media="(min-width: 992px)"
+                        srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145">
+                <source media="(max-width: 991px)"
+                        srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145">
+                <img width="237" height="66" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145" alt="BookStore" class="lazy img-responsive mx-auto d-block" />
+            </picture>
+        </a>
+        <a href="javascript:void(0)" class="evo-header-cart d-sm-inline-block d-lg-none" aria-label="Xem giỏ hàng" title="Giỏ hàng">
+            <svg viewBox="0 0 19 23">
+                <path d="M0 22.985V5.995L2 6v.03l17-.014v16.968H0zm17-15H2v13h15v-13zm-5-2.882c0-2.04-.493-3.203-2.5-3.203-2 0-2.5 1.164-2.5 3.203v.912H5V4.647C5 1.19 7.274 0 9.5 0 11.517 0 14 1.354 14 4.647v1.368h-2v-.912z" fill="#222"></path>
+            </svg>
+            <span class="count_item_pr">0</span>
+        </a>
+    </div>
+    <div class="evo-header-search evo-searchs">
+        <form action="https://petshop.vn/search" method="get" class="evo-header-search-form evo-search-form" role="search">
+            <input type="text" name="query" class="search-auto form-control" placeholder="Bạn cần tìm gì?" autocomplete="off" />
+            <input type="hidden" name="type" value="product" />
+            <button class="btn btn-default" type="submit" aria-label="Tìm kiếm">
+                <svg class="Icon Icon--search-desktop" viewBox="0 0 21 21">
+                    <g transform="translate(1 1)" stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="square">
+                        <path d="M18 18l-5.7096-5.7096"></path>
+                        <circle cx="7.2" cy="7.2" r="7.2"></circle>
+                    </g>
+                </svg>
+            </button>
+        </form>
+    </div>
+    @if (usercustomer == null)
+    {
+        <div class="evo-main-account d-lg-flex d-none">
+            <p class="header-account">
+                <svg viewBox="0 0 512 512"><path d="M437.02,330.98c-27.883-27.882-61.071-48.523-97.281-61.018C378.521,243.251,404,198.548,404,148    C404,66.393,337.607,0,256,0S108,66.393,108,148c0,50.548,25.479,95.251,64.262,121.962    c-36.21,12.495-69.398,33.136-97.281,61.018C26.629,379.333,0,443.62,0,512h40c0-119.103,96.897-216,216-216s216,96.897,216,216    h40C512,443.62,485.371,379.333,437.02,330.98z M256,256c-59.551,0-108-48.448-108-108S196.449,40,256,40    c59.551,0,108,48.448,108,108S315.551,256,256,256z" data-original="#222222" class="active-path" fill="#222222" /></svg>
+                <span class="acc-text">Tài khoản</span>
+            </p>
+            <ul>
+                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("Login","Users")" title="Đăng nhập">Đăng nhập</a></li>
+                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("Register","Users")" title="Đăng ký">Đăng ký</a></li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="evo-main-account d-lg-flex d-none">
+            <p class="header-account">
+                <svg viewBox="0 0 512 512"><path d="M437.02,330.98c-27.883-27.882-61.071-48.523-97.281-61.018C378.521,243.251,404,198.548,404,148    C404,66.393,337.607,0,256,0S108,66.393,108,148c0,50.548,25.479,95.251,64.262,121.962    c-36.21,12.495-69.398,33.136-97.281,61.018C26.629,379.333,0,443.62,0,512h40c0-119.103,96.897-216,216-216s216,96.897,216,216    h40C512,443.62,485.371,379.333,437.02,330.98z M256,256c-59.551,0-108-48.448-108-108S196.449,40,256,40    c59.551,0,108,48.448,108,108S315.551,256,256,256z" data-original="#222222" class="active-path" fill="#222222" /></svg>
+                <span class="acc-text">Chào @usercustomer.nameCustomer</span>
+            </p>
+            <ul>
+                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("Logout","Users")" title="Đăng Xuất">Đăng xuất</a></li>
+            </ul>
+        </div>
+    }
+    <div class="evo-header-carts d-lg-flex d-none">
+        <a href="javascript:void(0)" class="evo-header-cart" aria-label="Xem giỏ hàng" title="Giỏ hàng">
+            <svg viewBox="0 0 512 512"><g><path xmlns="http://www.w3.org/2000/svg" d="m504.399 185.065c-6.761-8.482-16.904-13.348-27.83-13.348h-98.604l-53.469-122.433c-3.315-7.591-12.157-11.06-19.749-7.743-7.592 3.315-11.059 12.158-7.743 19.75l48.225 110.427h-178.458l48.225-110.427c3.315-7.592-.151-16.434-7.743-19.75-7.591-3.317-16.434.15-19.749 7.743l-53.469 122.434h-98.604c-10.926 0-21.069 4.865-27.83 13.348-6.637 8.328-9.086 19.034-6.719 29.376l52.657 230c3.677 16.06 17.884 27.276 34.549 27.276h335.824c16.665 0 30.872-11.216 34.549-27.276l52.657-230.001c2.367-10.342-.082-21.048-6.719-29.376zm-80.487 256.652h-335.824c-2.547 0-4.778-1.67-5.305-3.972l-52.657-229.998c-.413-1.805.28-3.163.936-3.984.608-.764 1.985-2.045 4.369-2.045h85.503l-3.929 8.997c-3.315 7.592.151 16.434 7.743 19.75 1.954.854 3.99 1.258 5.995 1.258 5.782 0 11.292-3.363 13.754-9l9.173-21.003h204.662l9.173 21.003c2.462 5.638 7.972 9 13.754 9 2.004 0 4.041-.404 5.995-1.258 7.592-3.315 11.059-12.158 7.743-19.75l-3.929-8.997h85.503c2.384 0 3.761 1.281 4.369 2.045.655.822 1.349 2.18.936 3.983l-52.657 230c-.528 2.301-2.76 3.971-5.307 3.971z" fill="#ffffff" data-original="#000000" style="" /><path xmlns="http://www.w3.org/2000/svg" d="m166 266.717c-8.284 0-15 6.716-15 15v110c0 8.284 6.716 15 15 15s15-6.716 15-15v-110c0-8.284-6.715-15-15-15z" fill="#ffffff" data-original="#000000" style="" /><path xmlns="http://www.w3.org/2000/svg" d="m256 266.717c-8.284 0-15 6.716-15 15v110c0 8.284 6.716 15 15 15s15-6.716 15-15v-110c0-8.284-6.716-15-15-15z" fill="#ffffff" data-original="#000000" style="" /><path xmlns="http://www.w3.org/2000/svg" d="m346 266.717c-8.284 0-15 6.716-15 15v110c0 8.284 6.716 15 15 15s15-6.716 15-15v-110c-.001-8.284-6.716-15-15-15z" fill="#ffffff" data-original="#000000" style="" /></g></svg>
+            <span class="count_item_pr">0</span>
+            <span class="acc-text">Giỏ hàng</span>
+        </a>
+    </div>
+</div>

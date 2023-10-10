@@ -30,21 +30,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="dbBookStoreModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-          <ScalarProperty Name="codeCustomer" ColumnName="codeCustomer" />
-          <ScalarProperty Name="nameCustomer" ColumnName="nameCustomer" />
-          <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="passWord" ColumnName="passWord" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="birthDay" ColumnName="birthDay" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="dbBookStoreModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -119,6 +104,22 @@
           <ScalarProperty Name="access" ColumnName="access" />
           <ScalarProperty Name="idBooks" ColumnName="idBooks" />
           <ScalarProperty Name="idAuthor" ColumnName="idAuthor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="dbBookStoreModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="creDate" ColumnName="creDate" />
+          <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="nameCustomer" ColumnName="nameCustomer" />
+          <ScalarProperty Name="codeCustomer" ColumnName="codeCustomer" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
