@@ -10,11 +10,14 @@ using BookStores.Models;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using PagedList;
+using BookStores.App_Start;
 
 namespace BookStores.Areas.Admin.Controllers
 {
+    [AdminAuthorize]
     public class AuthorController : Controller
     {
+
         private dbBookStoreEntities db = new dbBookStoreEntities();
 
         // GET: Admin/Author

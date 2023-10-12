@@ -120,11 +120,11 @@ namespace BookStores.Controllers
         {
             if (Session["Customer"] == null || Session["Customer"].ToString() == "")
             {
-                ViewBag.ThongBao = "Bạn chưa đăng nhập, vui lòng đăng nhập trước khi đặt hàng";
+                return RedirectToAction("Login", "Users");
             }
             if (Session["Cart"] == null)
             {
-                return RedirectToAction("Index", "SachOnline");
+                return RedirectToAction("Index", "BookStore");
             }
             List<Cart> lstCart = GetCarts();
             ViewBag.TongSoLuong = SumQuantity();

@@ -10,9 +10,11 @@ using BookStores.Models;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using PagedList;
+using BookStores.App_Start;
 
 namespace BookStores.Areas.Admin.Controllers
 {
+    [AdminAuthorize]
     public class PublisherController : Controller
     {
         private dbBookStoreEntities db = new dbBookStoreEntities();
@@ -112,9 +114,16 @@ namespace BookStores.Areas.Admin.Controllers
                 int nextId = GetNextId();
                 publisher.idPublisher = nextId;
                 publisher.codePublisher = "NXB" + nextId.ToString("2023BS"); ;
-                db.Publishers.Add(publisher);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.Publishers.SingleOrDefault(pb => pb.namePublisher == publisher.namePublisher) != null)
+                {
+                    ViewBag.ThongBao = "Nhà xuất bản này đã tồn tại, vui lòng nhập nhà xuất bản khác";
+                }
+                else
+                {
+                    db.Publishers.Add(publisher);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(publisher);

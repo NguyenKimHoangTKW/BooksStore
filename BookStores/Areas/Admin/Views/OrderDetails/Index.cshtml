@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookStores.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.codeBooks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.codeOrder)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.codeBooks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.codeOrder)
+        </td>
+        <td>
+            <a href="/Admin/OrderDetails/Details?id=@item.Order.idOrder">Xem</a>
+        </td>
+    </tr>
+}
+
+</table>

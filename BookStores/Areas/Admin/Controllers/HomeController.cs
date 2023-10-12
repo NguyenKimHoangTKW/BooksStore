@@ -1,4 +1,5 @@
-﻿using BookStores.Models;
+﻿using BookStores.App_Start;
+using BookStores.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace BookStores.Areas.Admin.Controllers
 {
+    [AdminAuthorize]
     public class HomeController : Controller
     {
         private dbBookStoreEntities db = new dbBookStoreEntities();

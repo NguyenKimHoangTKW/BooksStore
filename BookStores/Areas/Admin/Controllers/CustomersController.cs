@@ -10,8 +10,11 @@ using BookStores.Models;
 using PagedList;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using BookStores.App_Start;
+
 namespace BookStores.Areas.Admin.Controllers
 {
+    [AdminAuthorize]
     public class CustomersController : Controller
     {
         private dbBookStoreEntities db = new dbBookStoreEntities();

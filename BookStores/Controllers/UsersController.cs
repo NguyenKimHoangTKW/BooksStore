@@ -33,6 +33,7 @@ namespace BookStores.Controllers
                 Session["Customer"] = isLoginCustomer;
                 return RedirectToAction("Index", "BookStore", new { area = "" });
             }
+          
             return View();
         }
         [HttpGet]
@@ -85,51 +86,11 @@ namespace BookStores.Controllers
             Session.Clear();
             return RedirectToAction("Index", "BookStore", new {area =""});
         }
-        [HttpGet]
-        public ActionResult TitleUser()
+
+
+        public ActionResult Error()
         {
-            var usercustomer = Session["Customer"] as BookStores.Models.Customer;
-            if (usercustomer != null)
-            {
-                return View(usercustomer);
-            }
-            return View(usercustomer);  
-        }
-
-        [HttpPost]
-        public ActionResult TitleUser(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                var usercustomer = Session["Customer"] as BookStores.Models.Customer;
-                if (usercustomer != null)
-                {
-                    // Update the customer data from the session
-                    usercustomer.nameCustomer = customer.nameCustomer;
-                    usercustomer.email = customer.email;
-                    usercustomer.userName = customer.userName;
-                    usercustomer.passWord = customer.passWord;
-                    usercustomer.phone = customer.phone;
-                    usercustomer.birthDay = customer.birthDay;
-                    usercustomer.address = customer.address;
-
-                    // Save the changes to the database
-                    try
-                    {
-                        db.Entry(usercustomer).State = EntityState.Modified;
-                        db.SaveChanges();
-
-                        return RedirectToAction("TitleUser");
-                    }
-                    catch (Exception ex)
-                    {
-                        // Log or handle the exception as needed
-                        ModelState.AddModelError("", "An error occurred while saving data to the database.");
-                    }
-                }
-            }
-
-            return View(customer);
+            return View();
         }
     }
 }
