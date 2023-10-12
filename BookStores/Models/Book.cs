@@ -17,8 +17,8 @@ namespace BookStores.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
             this.WriteBooks = new HashSet<WriteBook>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int idBooks { get; set; }
@@ -34,9 +34,9 @@ namespace BookStores.Models
     
         public virtual Publisher Publisher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WriteBook> WriteBooks { get; set; }
         public virtual BookCategory BookCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -13,10 +13,9 @@ namespace BookStores.Controllers
         // GET: BookStore
         public ActionResult Index()
         {
-            var listbooksnew = GetBooksNew(2);
+            var listbooksnew = GetBooksNew(20);
             return View(listbooksnew);
         }
-        [HttpGet]
         public ActionResult TopicPartialView()
         {
             var listTopic = from tp in db.Topics select tp;
@@ -37,6 +36,11 @@ namespace BookStores.Controllers
         {
             var book = from s in db.Books where s.idBookCat == id select s;
             return View(book);
+        }
+        public ActionResult BookCatPartial(int id)
+        {
+            var bookcat = from s in db.BookCategories where s.idTopic == id select s;
+            return PartialView(bookcat);
         }
     }
 }

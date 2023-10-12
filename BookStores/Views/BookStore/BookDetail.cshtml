@@ -9,7 +9,7 @@
             <div class="evo-main-title-breadcrumb text-center">@Model.nameBooks</div>
             <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
                 <li class="home" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="index.html" title="Trang chủ">
+                    <a itemprop="item" href="@Url.Action("Index","BookStore")" title="Trang chủ">
                         <span itemprop="name">Trang chủ</span>
                         <meta itemprop="position" content="1" />
                     </a>
@@ -17,7 +17,7 @@
 
 
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="nem.html" title="Nệm">
+                    <a itemprop="item" href="@Url.Action("Index","BookStore")" title="Nệm">
                         <span itemprop="name">Bookstore</span>
                         <meta itemprop="position" content="2" />
 
@@ -72,8 +72,8 @@ Cứ đi ắt sẽ đến, cứ đọc rồi ứng dụng, bạn sẽ thấy cu�
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper" id="lightgallery">
 
-                                <a class="swiper-slide" data-hash="0" href="~/Style/bizweb.dktcdn.net/thumb/1024x1024/100/147/060/products/351184790-754193879785192-2569599633192683134-nc025.jpg?v=1687158141443" title="Click để xem">
-                                    <img height="480" width="480" src="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" alt="LÀM CHỦ TUỔI 20" data-image="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/lam-chu-tuoi-20.jpg?v=1687158141443?v=1687158141443" class="img-responsive mx-auto d-block swiper-lazy" />
+                                <a class="swiper-slide" data-hash="0" href="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" title="Click để xem">
+                                    <img height="480" width="480" src="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" alt="@Model.nameBooks" data-image="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" class="img-responsive mx-auto d-block swiper-lazy" />
                                 </a>
 
 
@@ -98,7 +98,7 @@ Cứ đi ắt sẽ đến, cứ đọc rồi ứng dụng, bạn sẽ thấy cu�
                             <div class="price-box clearfix">
 
                                 <span class="special-price">
-                                    <span class="price product-price">@string.Format("{0:#,0 VNĐ}",Model.price)</span>
+                                    <span class="price product-price">@string.Format("{0:#,0 VNĐ}", Model.price)</span>
                                 </span>
 
                             </div>
@@ -109,7 +109,16 @@ Cứ đi ắt sẽ đến, cứ đọc rồi ứng dụng, bạn sẽ thấy cu�
                                 @Model.describe
                             </p>
                         </div>
+                        <div class="form-groups clearfix">
+                      
+                            <div class="btn-mua">
+                                <a href="@Url.Action("AddCart","Cart", new { ms = Model.idBooks, url = Request.Url.ToString() })">Thêm vào giỏ</a>
+                         
+                                    
+                                <button type="button" class="btn btn-buy-now">Mua ngay</button>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

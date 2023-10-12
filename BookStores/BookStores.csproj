@@ -141,6 +141,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BooksController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
     <Compile Include="Areas\Admin\Controllers\WriteBooksController.cs" />
     <Compile Include="Controllers\BookStoreController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BooksStoresModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>BooksStoresModel.tt</DependentUpon>
     </Compile>
@@ -1061,6 +1063,11 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Areas\Admin\Views\BookCategories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BookCategories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BookCategories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BookCategories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BookCategories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1553,7 +1560,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\themes\880570\assets\Bookstore.webp" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\themes\880570\assets\dao-li-lam-nguoi.webp" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\themes\880570\assets\montserratregular5a44.ttf" />
@@ -1572,6 +1578,12 @@
     <Content Include="Views\BookStore\BookDetail.cshtml" />
     <Content Include="Views\Shared\_StylePartialView.cshtml" />
     <Content Include="Views\BookStore\BooksByTopic.cshtml" />
+    <Content Include="Views\BookStore\BookCatPartial.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Cart\OrderConfirm.cshtml" />
+    <Content Include="Views\Users\TitleUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

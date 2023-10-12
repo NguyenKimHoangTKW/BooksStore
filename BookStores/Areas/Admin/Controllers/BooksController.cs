@@ -69,7 +69,7 @@ namespace BookStores.Areas.Admin.Controllers
             page = page ?? 1; //if (page == null) page = 1;
 
             // 3.4. Tạo kích thước trang (pageSize), mặc định là 5.
-            int pageSize = (size ?? 5);
+            int pageSize = (size ?? 20);
 
             ViewBag.pageSize = pageSize;
 
@@ -122,6 +122,7 @@ namespace BookStores.Areas.Admin.Controllers
                 int nextId = GetNextId();
                 book.idBooks = nextId;
                 book.codeBooks = "SACH" + nextId.ToString("2023BS");
+                book.updateDay = DateTime.Now;
                 if (Thumb != null && Thumb.ContentLength > 0)
                 {
                     string _Head = Path.GetFileNameWithoutExtension(Thumb.FileName);
@@ -168,7 +169,7 @@ namespace BookStores.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idBookCat = new SelectList(db.Topics, "idBookCat", "nameBookCat", book.idBookCat);
+            ViewBag.idBookCat = new SelectList(db.BookCategories, "idBookCat", "nameBookCat", book.idBookCat);
             ViewBag.idPublisher = new SelectList(db.Publishers, "idPublisher", "namePublisher", book.idPublisher);
             return View(book);
         }
@@ -178,7 +179,7 @@ namespace BookStores.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idBooks,codeBooks,nameBooks,describe,Thumb,updateDay,quantity,price,idTopic,idPublisher")] Book book, HttpPostedFileBase Thumb, FormCollection form)
+        public ActionResult Edit([Bind(Include = "idBooks,codeBooks,nameBooks,describe,Thumb,updateDay,quantity,price,idBookCat,idPublisher")] Book book, HttpPostedFileBase Thumb, FormCollection form)
         {
             if (ModelState.IsValid)
             {

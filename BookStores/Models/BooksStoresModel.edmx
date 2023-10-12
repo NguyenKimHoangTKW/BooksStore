@@ -71,12 +71,12 @@
           <Key>
             <PropertyRef Name="idOrder" />
           </Key>
-          <Property Name="idOrder" Type="int" Nullable="false" />
-          <Property Name="codeOrder" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codeOrder" Type="char" MaxLength="50" Nullable="false" />
           <Property Name="checkPay" Type="bit" Nullable="false" />
           <Property Name="deliveryStatus" Type="int" Nullable="false" />
-          <Property Name="orderDate" Type="smalldatetime" Nullable="false" />
-          <Property Name="deliveryDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="orderDate" Type="datetime" Nullable="false" />
+          <Property Name="deliveryDate" Type="datetime" Nullable="false" />
           <Property Name="idCustomer" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -87,7 +87,7 @@
           <Property Name="idOrder" Type="int" Nullable="false" />
           <Property Name="idBooks" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -284,32 +284,6 @@
           <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="idOrder" />
-          </Key>
-          <Property Name="idOrder" Type="Int32" Nullable="false" />
-          <Property Name="codeOrder" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="checkPay" Type="Boolean" Nullable="false" />
-          <Property Name="deliveryStatus" Type="Int32" Nullable="false" />
-          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="idCustomer" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-          <NavigationProperty Name="Customer" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="idOrder" />
-            <PropertyRef Name="idBooks" />
-          </Key>
-          <Property Name="idOrder" Type="Int32" Nullable="false" />
-          <Property Name="idBooks" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Book" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="OrderDetail" ToRole="Book" />
-        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -320,27 +294,9 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_OrderDetail_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="idOrder" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="idOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="dbBookStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
           <EntitySet Name="Publishers" EntityType="dbBookStoreModel.Publisher" />
           <EntitySet Name="Authors" EntityType="dbBookStoreModel.Author" />
           <EntitySet Name="WriteBooks" EntityType="dbBookStoreModel.WriteBook" />
@@ -349,19 +305,11 @@
             <End Role="WriteBook" EntitySet="WriteBooks" />
           </AssociationSet>
           <EntitySet Name="Customers" EntityType="dbBookStoreModel.Customer" />
-          <AssociationSet Name="FK_Order_Customer" Association="dbBookStoreModel.FK_Order_Customer">
-            <End EntitySet="Customers" Role="Customer" />
-            <End EntitySet="Orders" Role="Order" />
-          </AssociationSet>
           <EntitySet Name="Books" EntityType="dbBookStoreModel.Book" />
           <EntitySet Name="Topics" EntityType="dbBookStoreModel.Topic" />
           <AssociationSet Name="FK_Books_Publisher" Association="dbBookStoreModel.FK_Books_Publisher">
             <End Role="Publisher" EntitySet="Publishers" />
             <End Role="Book" EntitySet="Books" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Books" Association="dbBookStoreModel.FK_OrderDetail_Books">
-            <End Role="Book" EntitySet="Books" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_WriteBook_Books" Association="dbBookStoreModel.FK_WriteBook_Books">
             <End Role="Book" EntitySet="Books" />
@@ -375,6 +323,20 @@
           <AssociationSet Name="FK_Books_BookCategory" Association="dbBookStoreModel.FK_Books_BookCategory">
             <End Role="BookCategory" EntitySet="BookCategories" />
             <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <EntitySet Name="OrderDetails" EntityType="dbBookStoreModel.OrderDetail" />
+          <AssociationSet Name="FK_OrderDetail_Books" Association="dbBookStoreModel.FK_OrderDetail_Books">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="dbBookStoreModel.Order" />
+          <AssociationSet Name="FK_Order_Customer" Association="dbBookStoreModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="dbBookStoreModel.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Publisher">
@@ -440,18 +402,6 @@
           <Property Name="creDate" Precision="3" Type="DateTime" />
           <NavigationProperty Name="Orders" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
-        <Association Name="FK_Order_Customer">
-          <End Type="dbBookStoreModel.Customer" Multiplicity="1" Role="Customer" />
-          <End Type="dbBookStoreModel.Order" Multiplicity="*" Role="Order" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="idCustomer" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="idCustomer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="idBooks" />
@@ -467,9 +417,9 @@
           <Property Name="idBookCat" Type="Int32" Nullable="false" />
           <Property Name="idPublisher" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Publisher" Relationship="dbBookStoreModel.FK_Books_Publisher" FromRole="Book" ToRole="Publisher" />
-          <NavigationProperty Name="OrderDetails" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="Book" ToRole="OrderDetail" />
           <NavigationProperty Name="WriteBooks" Relationship="dbBookStoreModel.FK_WriteBook_Books" FromRole="Book" ToRole="WriteBook" />
           <NavigationProperty Name="BookCategory" Relationship="dbBookStoreModel.FK_Books_BookCategory" FromRole="Book" ToRole="BookCategory" />
+          <NavigationProperty Name="OrderDetails" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="Book" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -489,18 +439,6 @@
             </Principal>
             <Dependent Role="Book">
               <PropertyRef Name="idPublisher" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetail_Books">
-          <End Type="dbBookStoreModel.Book" Role="Book" Multiplicity="1" />
-          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Book">
-              <PropertyRef Name="idBooks" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="idBooks" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,6 +489,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="idOrder" />
+            <PropertyRef Name="idBooks" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <Property Name="idBooks" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="Book" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="OrderDetail" ToRole="Book" />
+          <NavigationProperty Name="Order" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderDetail_Books">
+          <End Type="dbBookStoreModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="idBooks" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idBooks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codeOrder" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="checkPay" Type="Boolean" Nullable="false" />
+          <Property Name="deliveryStatus" Type="Int32" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCustomer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderDetails" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Type="dbBookStoreModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="dbBookStoreModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="idCustomer" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Type="dbBookStoreModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="idOrder" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -567,29 +567,6 @@
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="passWord" ColumnName="passWord" />
                 <ScalarProperty Name="access" ColumnName="access" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="dbBookStoreModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-                <ScalarProperty Name="codeOrder" ColumnName="codeOrder" />
-                <ScalarProperty Name="checkPay" ColumnName="checkPay" />
-                <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
-                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
-                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-                <ScalarProperty Name="idBooks" ColumnName="idBooks" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -686,6 +663,29 @@
                 <ScalarProperty Name="idTopic" ColumnName="idTopic" />
                 <ScalarProperty Name="codeBookCat" ColumnName="codeBookCat" />
                 <ScalarProperty Name="idBookCat" ColumnName="idBookCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idBooks" ColumnName="idBooks" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="dbBookStoreModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
+                <ScalarProperty Name="checkPay" ColumnName="checkPay" />
+                <ScalarProperty Name="codeOrder" ColumnName="codeOrder" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

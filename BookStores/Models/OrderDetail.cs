@@ -17,9 +17,9 @@ namespace BookStores.Models
         public int idOrder { get; set; }
         public int idBooks { get; set; }
         public int quantity { get; set; }
-        public double price { get; set; }
+        public decimal price { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Book Book { get; set; }
+        public virtual Order Order { get; set; }
     }
 }
