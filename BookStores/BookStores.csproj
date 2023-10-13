@@ -1080,6 +1080,10 @@
     <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderNon.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderInTransit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderSuccessfully.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -21,71 +21,21 @@ namespace BookStores.Areas.Admin.Controllers
         private dbBookStoreEntities db = new dbBookStoreEntities();
 
         // GET: Admin/Books
-        public ActionResult Index(int? size, int? page, string sortProperty, string searchString, string sortOrder = "", int bookid = 0)
+        public ActionResult Index(int bookid = 0)
         {
-            ViewBag.Keyword = searchString;
-            ViewBag.Subject = bookid;
+            
             var book = db.Books.Include(p => p.Publisher).Include(p => p.OrderDetails).Include(p => p.WriteBooks).Include(p => p.BookCategory);
 
-            if (!String.IsNullOrEmpty(searchString))
-                book = book.Where(b => b.nameBooks.Contains(searchString));
+            int nxbid = 0;
 
             if (bookid != 0)
                 book = book.Where(c => c.idBookCat == bookid);
 
+            if (nxbid != 0)
+                book = book.Where(c => c.idPublisher == bookid);
             ViewBag.bookid = new SelectList(db.BookCategories, "idBookCat", "nameBookCat");
-
-            if (sortOrder == "asc") ViewBag.SortOrder = "desc";
-            if (sortOrder == "desc") ViewBag.SortOrder = "";
-            if (sortOrder == "") ViewBag.SortOrder = "asc";
-            // 2.1. Tạo thuộc tính sắp xếp mặc định là "Title"
-            if (String.IsNullOrEmpty(sortProperty)) sortProperty = "nameBooks";
-
-            // 2.2. Sắp xếp tăng/giảm bằng phương thức OrderBy sử dụng trong thư viện Dynamic LINQ
-            if (sortOrder == "desc")
-                book = book.OrderBy(sortProperty + " desc");
-            else
-                book = book.OrderBy(sortProperty);
-
-            // 3 Đoạn code sau dùng để phân trang
-            ViewBag.Page = page;
-
-            // 3.1. Tạo danh sách chọn số trang
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem { Text = "5", Value = "5" });
-            items.Add(new SelectListItem { Text = "10", Value = "10" });
-            items.Add(new SelectListItem { Text = "20", Value = "20" });
-            items.Add(new SelectListItem { Text = "25", Value = "25" });
-            items.Add(new SelectListItem { Text = "50", Value = "50" });
-            items.Add(new SelectListItem { Text = "100", Value = "100" });
-            items.Add(new SelectListItem { Text = "200", Value = "200" });
-
-            // 3.2. Thiết lập số trang đang chọn vào danh sách List<SelectListItem> items
-            foreach (var item in items)
-            {
-                if (item.Value == size.ToString()) item.Selected = true;
-            }
-            ViewBag.Size = items;
-            ViewBag.CurrentSize = size;
-            // 3.3. Nếu page = null thì đặt lại là 1.
-            page = page ?? 1; //if (page == null) page = 1;
-
-            // 3.4. Tạo kích thước trang (pageSize), mặc định là 5.
-            int pageSize = (size ?? 20);
-
-            ViewBag.pageSize = pageSize;
-
-            // 3.5. Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
-            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
-            int pageNumber = (page ?? 1);
-
-            // 3.6 Lấy tổng số record chia cho kích thước để biết bao nhiêu trang
-            int checkTotal = (int)(book.ToList().Count / pageSize) + 1;
-            // Nếu trang vượt qua tổng số trang thì thiết lập là 1 hoặc tổng số trang
-            if (pageNumber > checkTotal) pageNumber = checkTotal;
-
-            // 4. Trả kết quả về Views
-            return View(book.ToPagedList(pageNumber, pageSize));
+            ViewBag.nxbid = new SelectList(db.Publishers, "idPublisher", "namePublisher");
+            return View(book.ToList());
         }
 
         // GET: Admin/Books/Details/5

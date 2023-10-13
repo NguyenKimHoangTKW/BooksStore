@@ -20,10 +20,55 @@ namespace BookStores.Areas.Admin.Controllers
         // GET: Admin/Orders
         public async Task<ActionResult> Index()
         {
+            
             var orders = db.Orders.Include(o => o.Customer);
             return View(await orders.ToListAsync());
         }
+        public ActionResult OrderNon()
+        {
+            var non = "Đã tiếp nhận đơn hàng";
+            var ordernon = from o in db.Orders
+                           where o.deliveryStatus.Equals(non)
+                           select o;
+            return View(ordernon);
+        }
+        public ActionResult OrderInTransit()
+        {
+            var intransit = "Đang giao hàng";
+            var orderintransit = from o in db.Orders
+                           where o.deliveryStatus.Equals(intransit)
+                           select o;
+            if (db.Orders.SingleOrDefault(x => x.deliveryStatus.Equals(intransit)) == null)
+            {
+                return RedirectToAction("Error", "Orders");
+            }
+            else
+            {
+                return View(orderintransit);
+            }
+            
+        }
+        public ActionResult OrderSuccessfully()
+        {
+            var successfully = "Giao hàng thành công";
 
+            var ordersuccessfully = from o in db.Orders
+                                    where o.deliveryStatus.Equals(successfully)
+                                    select o;
+            if (db.Orders.SingleOrDefault(x => x.deliveryStatus.Equals(successfully)) == null)
+            {
+                return RedirectToAction("Error", "Orders");
+            }
+            else
+            {
+                return View(ordersuccessfully);
+            }
+           
+        }
+        public ActionResult Error()
+        {
+            return View();
+        }
         // GET: Admin/Orders/Details/5
         public async Task<ActionResult> Details(int? id)
         {
