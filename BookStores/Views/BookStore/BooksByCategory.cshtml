@@ -1,0 +1,161 @@
+﻿@model IEnumerable<BookStores.Models.Book>
+@{
+    ViewBag.Title = "BooksByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="awe-section-1">
+    <div class="home-slider swiper-container gallery-top">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <a href="#" class="clearfix" title="BookStore">
+                    <picture>
+                        <source media="(min-width: 1200px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
+                        <source media="(min-width: 992px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
+                        <source media="(min-width: 569px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
+                        <source media="(max-width: 567px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
+
+                    </picture>
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="#" class="clearfix" title="BookStore">
+                    <picture>
+                        <source media="(min-width: 1200px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
+                        <source media="(min-width: 992px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
+                        <source media="(min-width: 569px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
+                        <source media="(max-width: 567px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
+                        <img style="height: 500px;width: 100%;" src="~/Style/bizweb.dktcdnd.net/thumb/grande/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145" alt="/" class="img-responsive center-block d-block mx-auto" />
+
+                    </picture>
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="#" class="clearfix" title="BookStore">
+                    <picture>
+                        <source media="(min-width: 1200px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
+                        <source media="(min-width: 992px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
+                        <source media="(min-width: 569px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
+                        <source media="(max-width: 567px)"
+                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
+                        <img style="height: 500px;width: 100%;" src="~/Style/bizweb.dktcdn.net/thumb/grande/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145" alt="/" class="img-responsive center-block d-block mx-auto" />
+                    </picture>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <script>
+        var swiper = new Swiper('.home-slider', {
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            }
+        });</script>
+</section>
+<div class="container">
+    <div class="bg-white">
+        <section class="awe-section-1s">
+            <div class="ant-categories row">
+
+            </div>
+        </section>
+        <section class="awe-section-2s">
+            <link rel="preload" as="script" href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/flipclockb828.js?1687579687145" />
+            <script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/flipclockb828.js?1687579687145" type="text/javascript"></script>
+            <div class="ant-block-product">
+                <div class="ant-block-product-title">
+                    <a class="ant-titles" href="san-pham-noi-bat.html" title="Sách nổi bật"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="Sách nổi bật " height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" /> </a>
+                    <div class="timer">
+                        <div class="time" data-countdown="countdown" data-date="12-25-2022-09-15-45"></div>
+                    </div>
+                </div>
+
+                <div class="ant-swiper-product row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-15 col-md-15 col-sm-4 col-6">
+
+
+                            <div class="evo-product-block-item">
+                                <a href="/" title="Đoàn binh Tây Tiến" class="product-transition">
+                                    <img src="~/Areas/Style/Images/ImagesBooks/@item.Thumb" style="image-rendering: pixelated; opacity: 1;" />
+                                </a>
+                                <div class="product-info">
+                                    <a href="@Url.Action("BookDetail","BookStore", new {id=item.idBooks})" title="Đoàn binh Tây Tiến" class="ant-item-product-name">@item.nameBooks</a>
+                                    <div class="product__price">
+
+
+                                        <span class="price">@string.Format("{0:#,0 VNĐ}", item.price)</span>
+
+
+                                    </div>
+                                </div>
+                                <form class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart">
+
+
+                                    <input type="hidden" name="variantId" value="60462122" />
+                                    <a href="/" class="action add_to_cart cart-button" rel="nofollow" title="Mua ngay">Mua ngay</a>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+    </div>
+    <script>
+        var swiper = new Swiper('.ant-similar-product-swiper', {
+            slidesPerView: 4,
+            spaceBetween: 15,
+            slidesPerGroup: 2,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                300: {
+                    slidesPerView: 2,
+                    spaceBetween: 7,
+                },
+                500: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 15,
+                },
+                1200: {
+                    slidesPerView: 5,
+                    spaceBetween: 15,
+                }
+            }
+        });</script>
+    </section>
+</div>
+

@@ -60,7 +60,8 @@
                 <span class="acc-text">Chào @usercustomer.nameCustomer</span>
             </p>
             <ul>
-                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("TitleUser","Users")" title="Thông tin tài khoản">Thông tin tài khoản</a></li>
+                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("TitleUser","Users", new {id = usercustomer.idCustomer})" title="Thông tin tài khoản">Thông tin tài khoản</a></li>
+                <li class="ng-scope"><a rel="nofollow" href="@Url.Action("InfoOrder","Cart", new {id = usercustomer.idCustomer})" title="Thông tin đơn hàng">Thông tin đơn hàng</a></li>
                 <li class="ng-scope"><a rel="nofollow" href="@Url.Action("Logout","Users")" title="Đăng Xuất">Đăng xuất</a></li>
             </ul>
         </div>

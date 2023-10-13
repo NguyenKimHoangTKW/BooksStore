@@ -248,7 +248,7 @@
     <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="codeOrder" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
     <Property Name="checkPay" Type="Boolean" Nullable="false" />
-    <Property Name="deliveryStatus" Type="Int32" Nullable="false" />
+    <Property Name="deliveryStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="idCustomer" Type="Int32" Nullable="false" />

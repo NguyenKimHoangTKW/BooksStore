@@ -144,7 +144,7 @@ namespace BookStores.Controllers
             TimeSpan threeDays = new TimeSpan(3, 0, 0, 0);
             order.deliveryDate = order.orderDate + threeDays;
             order.checkPay = false;
-            order.deliveryStatus = 1;
+            order.deliveryStatus = "Chưa xử lý";
             db.Orders.Add(order);
             db.SaveChanges();
             foreach (var item in lstCart)
@@ -165,6 +165,23 @@ namespace BookStores.Controllers
         public ActionResult OrderConfirm()
         {
             return View();
+        }
+        public ActionResult InfoOrder(int? id)
+        {
+
+            var lstorder = from o in db.Orders
+                           where o.idCustomer == id
+                           select o;
+            return View(lstorder);
+        }
+
+        public ActionResult InfoOrderDetail (int? id)
+        {
+
+            var lstorderdetail = from o in db.OrderDetails
+                           where o.idOrder == id
+                           select o;
+            return View(lstorderdetail);
         }
     }
 }

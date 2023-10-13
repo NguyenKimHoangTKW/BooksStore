@@ -69,7 +69,7 @@
     <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="codeOrder" Type="char" MaxLength="50" Nullable="false" />
     <Property Name="checkPay" Type="bit" Nullable="false" />
-    <Property Name="deliveryStatus" Type="int" Nullable="false" />
+    <Property Name="deliveryStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="orderDate" Type="datetime" Nullable="false" />
     <Property Name="deliveryDate" Type="datetime" Nullable="false" />
     <Property Name="idCustomer" Type="int" Nullable="false" />

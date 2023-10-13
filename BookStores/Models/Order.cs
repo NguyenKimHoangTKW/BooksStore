@@ -23,7 +23,7 @@ namespace BookStores.Models
         public int idOrder { get; set; }
         public string codeOrder { get; set; }
         public bool checkPay { get; set; }
-        public int deliveryStatus { get; set; }
+        public string deliveryStatus { get; set; }
         public System.DateTime orderDate { get; set; }
         public System.DateTime deliveryDate { get; set; }
         public int idCustomer { get; set; }

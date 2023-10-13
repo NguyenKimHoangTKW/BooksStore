@@ -1076,7 +1076,6 @@
     <Content Include="Areas\Admin\Views\OrderDetails\Details.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
@@ -1092,6 +1091,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Style\assets\app.min.css" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\files\christlie111d.jpg" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\files\petshop656d.jpg" />
     <Content Include="Style\bizweb.dktcdn.net\100\147\060\themes\880570\assets\account_order_style.scssb828.css" />
@@ -1597,6 +1597,11 @@
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\OrderConfirm.cshtml" />
     <Content Include="Views\Users\Error.cshtml" />
+    <Content Include="Views\BookStore\BooksByCategory.cshtml" />
+    <Content Include="Views\Cart\InfoOrder.cshtml" />
+    <Content Include="Views\Cart\InfoOrderDetail.cshtml" />
+    <Content Include="Views\Users\TitleUser.cshtml" />
+    <Content Include="Views\Users\EditTitleUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

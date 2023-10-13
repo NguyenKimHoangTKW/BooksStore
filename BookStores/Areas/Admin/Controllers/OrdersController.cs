@@ -39,30 +39,6 @@ namespace BookStores.Areas.Admin.Controllers
             return View(order);
         }
 
-        // GET: Admin/Orders/Create
-        public ActionResult Create()
-        {
-            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "codeCustomer");
-            return View();
-        }
-
-        // POST: Admin/Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "idOrder,codeOrder,checkPay,deliveryStatus,orderDate,deliveryDate,idCustomer")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Orders.Add(order);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "codeCustomer", order.idCustomer);
-            return View(order);
-        }
 
         // GET: Admin/Orders/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -76,7 +52,7 @@ namespace BookStores.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "codeCustomer", order.idCustomer);
+            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "nameCustomer", order.idCustomer);
             return View(order);
         }
 
@@ -93,7 +69,7 @@ namespace BookStores.Areas.Admin.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "codeCustomer", order.idCustomer);
+            ViewBag.idCustomer = new SelectList(db.Customers, "idCustomer", "nameCustomer", order.idCustomer);
             return View(order);
         }
 

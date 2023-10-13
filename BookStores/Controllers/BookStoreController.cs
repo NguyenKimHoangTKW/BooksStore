@@ -34,13 +34,23 @@ namespace BookStores.Controllers
         }
         public ActionResult BooksByTopic(int id)
         {
-            var book = from s in db.Books where s.idBookCat == id select s;
+            var book = from s in db.Books 
+                       from tp in db.Topics
+                       from bc in db.BookCategories
+                       where s.idBookCat == bc.idBookCat
+                       where bc.idTopic == tp.idTopic
+                       where tp.idTopic == id select s;
             return View(book);
         }
         public ActionResult BookCatPartial(int id)
         {
             var bookcat = from s in db.BookCategories where s.idTopic == id select s;
             return PartialView(bookcat);
+        }
+        public ActionResult BooksByCategory(int id)
+        {
+            var book = from s in db.Books where s.idBookCat == id select s;
+            return View(book);
         }
     }
 }

@@ -24,7 +24,7 @@
         <EntityTypeShape EntityType="dbBookStoreModel.Order" Width="1.5" PointX="3" PointY="11.5" />
         <AssociationConnector Association="dbBookStoreModel.FK_Order_Customer" />
         <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Order" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
