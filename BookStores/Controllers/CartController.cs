@@ -182,6 +182,34 @@ namespace BookStores.Controllers
                            where o.idOrder == id
                            select o;
             return View(lstorderdetail);
+
+        }
+        public ActionResult InfoOrderPartial(int? id)
+        {
+            var non = "Đã tiếp nhận đơn hàng";
+            var lstorder = from o in db.Orders
+                           where o.idCustomer == id
+                           where o.deliveryStatus == non
+                           select o;
+            return PartialView(lstorder);
+        }
+        public ActionResult OrderInTransitPatial(int? id)
+        {
+            var non = "Đang giao hàng";
+            var lstorder = from o in db.Orders
+                           where o.idCustomer == id
+                           where o.deliveryStatus == non
+                           select o;
+            return PartialView(lstorder);
+        }
+        public ActionResult OrderSuccessfullyPartial(int? id)
+        {
+            var non = "Giao hàng thành công";
+            var lstorder = from o in db.Orders
+                           where o.idCustomer == id
+                           where o.deliveryStatus == non
+                           select o;
+            return PartialView(lstorder);
         }
     }
 }

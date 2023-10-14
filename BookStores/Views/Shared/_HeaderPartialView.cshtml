@@ -26,8 +26,11 @@
         </a>
     </div>
     <div class="evo-header-search evo-searchs">
-        <form action="https://petshop.vn/search" method="get" class="evo-header-search-form evo-search-form" role="search">
-            <input type="text" name="query" class="search-auto form-control" placeholder="Bạn cần tìm gì?" autocomplete="off" />
+
+        
+        @using (Html.BeginForm("GetAllBooks", "BookStore", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <input type="text" name="searchString" value="@ViewBag.Keyword" class="search-auto form-control" placeholder="Bạn cần tìm gì?" autocomplete="off" />
             <input type="hidden" name="type" value="product" />
             <button class="btn btn-default" type="submit" aria-label="Tìm kiếm">
                 <svg class="Icon Icon--search-desktop" viewBox="0 0 21 21">
@@ -37,8 +40,8 @@
                     </g>
                 </svg>
             </button>
-        </form>
-    </div>
+        }
+        </div>
     @if (usercustomer == null)
     {
         <div class="evo-main-account d-lg-flex d-none">

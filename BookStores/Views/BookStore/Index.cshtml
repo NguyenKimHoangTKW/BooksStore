@@ -3,6 +3,7 @@
     ViewBag.Title = "Trang Chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <section class="awe-section-1">
     <div class="home-slider swiper-container gallery-top">
         <div class="swiper-wrapper">
@@ -85,7 +86,6 @@
                         <div class="time" data-countdown="countdown" data-date="12-25-2022-09-15-45"></div>
                     </div>
                 </div>
-
                 <div class="ant-swiper-product row">
                     @foreach (var item in Model)
                     {
@@ -105,7 +105,7 @@
 
 
                                     </div>
-                                </div>                                     
+                                </div>
                                 <a href="@Url.Action("AddCart","Cart", new { ms = item.idBooks, url = Request.Url.ToString() })" class="action add_to_cart cart-button" title="Mua ngay">Mua ngay</a>
 
                                 <form class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart">
@@ -116,10 +116,10 @@
 
                                 </form>
                             </div>
-                            
+
                         </div>
                     }
-                  
+
                     <div class="ant-block-list-product">
                         <div class="ant-similar-product-swiper swiper-container">
                             <div class="swiper-wrapper">
@@ -138,41 +138,41 @@
             </div>
     </div>
     <script>
-var swiper = new Swiper('.ant-similar-product-swiper', {
-	slidesPerView: 4,
-	spaceBetween: 15,
-	slidesPerGroup: 2,
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
-	breakpoints: {
-		300: {
-			slidesPerView: 2,
-			spaceBetween: 7,
-		},
-		500: {
-			slidesPerView: 2,
-			spaceBetween: 10,
-		},
-		640: {
-			slidesPerView: 2,
-			spaceBetween: 10,
-		},
-		768: {
-			slidesPerView: 3,
-			spaceBetween: 10,
-		},
-		1024: {
-			slidesPerView: 4,
-			spaceBetween: 15,
-		},
-		1200: {
-			slidesPerView: 5,
-			spaceBetween: 15,
-		}
-	}
-});</script>
+        var swiper = new Swiper('.ant-similar-product-swiper', {
+            slidesPerView: 4,
+            spaceBetween: 15,
+            slidesPerGroup: 2,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                300: {
+                    slidesPerView: 2,
+                    spaceBetween: 7,
+                },
+                500: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 15,
+                },
+                1200: {
+                    slidesPerView: 5,
+                    spaceBetween: 15,
+                }
+            }
+        });</script>
     </section>
 
 

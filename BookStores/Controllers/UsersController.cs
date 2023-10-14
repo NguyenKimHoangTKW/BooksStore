@@ -53,17 +53,22 @@ namespace BookStores.Controllers
                 cus.creDate = DateTime.Now;
                 if (db.Customers.SingleOrDefault(c => c.userName == cus.userName) != null)
                 {
-                    ViewBag.ThongBao = "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác";
+                    TempData["SweetAlertMessage"] = "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác";
+                    TempData["SweetAlertType"] = "error";
                 }
                 else if (db.Customers.SingleOrDefault(c => c.email == cus.email) != null)
                 {
-                    ViewBag.ThongBao = "Email này đã tồn tại, vui lòng nhập Email khác";
+                    TempData["SweetAlertMessage"] = "Email này đã tồn tại, vui lòng nhập Email khác";
+                    TempData["SweetAlertType"] = "error";
+
                 }
                 else
                 {
+                    TempData["SweetAlertMessage"] = "Đăng ký thành công";
+                    TempData["SweetAlertType"] = "success";
                     db.Customers.Add(cus);
                     db.SaveChanges();
-                    return RedirectToAction("Login", "Users");
+                   
                 }
             }
             

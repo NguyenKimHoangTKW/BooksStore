@@ -1606,6 +1606,10 @@
     <Content Include="Views\Cart\InfoOrderDetail.cshtml" />
     <Content Include="Views\Users\TitleUser.cshtml" />
     <Content Include="Views\Users\EditTitleUser.cshtml" />
+    <Content Include="Views\Cart\InfoOrderPartial.cshtml" />
+    <Content Include="Views\Cart\OrderInTransitPatial.cshtml" />
+    <Content Include="Views\Cart\OrderSuccessfullyPartial.cshtml" />
+    <Content Include="Views\BookStore\GetAllBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

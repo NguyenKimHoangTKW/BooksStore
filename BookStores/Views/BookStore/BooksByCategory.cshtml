@@ -3,6 +3,7 @@
     ViewBag.Title = "BooksByCategory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <section class="awe-section-1">
     <div class="home-slider swiper-container gallery-top">
         <div class="swiper-wrapper">
@@ -80,7 +81,7 @@
             <script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/flipclockb828.js?1687579687145" type="text/javascript"></script>
             <div class="ant-block-product">
                 <div class="ant-block-product-title">
-                    <a class="ant-titles" href="san-pham-noi-bat.html" title="Sách nổi bật"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="Sách nổi bật " height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" /> </a>
+                    <a class="ant-titles" href="san-pham-noi-bat.html" title="Sách nổi bật"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="Sách nổi bật " height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" /> w</a>
                     <div class="timer">
                         <div class="time" data-countdown="countdown" data-date="12-25-2022-09-15-45"></div>
                     </div>
@@ -89,15 +90,17 @@
                 <div class="ant-swiper-product row">
                     @foreach (var item in Model)
                     {
+                  
+                        
                         <div class="col-lg-15 col-md-15 col-sm-4 col-6">
 
-
+                          
                             <div class="evo-product-block-item">
                                 <a href="/" title="Đoàn binh Tây Tiến" class="product-transition">
                                     <img src="~/Areas/Style/Images/ImagesBooks/@item.Thumb" style="image-rendering: pixelated; opacity: 1;" />
                                 </a>
                                 <div class="product-info">
-                                    <a href="@Url.Action("BookDetail","BookStore", new {id=item.idBooks})" title="Đoàn binh Tây Tiến" class="ant-item-product-name">@item.nameBooks</a>
+                                    <a href="@Url.Action("BookDetail","BookStore", new {id=item.idBooks})" title="@item.nameBooks" class="ant-item-product-name">@item.nameBooks</a>
                                     <div class="product__price">
 
 

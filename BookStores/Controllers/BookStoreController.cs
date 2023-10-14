@@ -13,8 +13,18 @@ namespace BookStores.Controllers
         // GET: BookStore
         public ActionResult Index()
         {
-            var listbooksnew = GetBooksNew(20);
+            var listbooksnew = GetBooksNew(15);
+           
             return View(listbooksnew);
+        }
+        public ActionResult GetAllBooks(string searchString)
+        {
+            var listbooks = from b in db.Books
+                            select b;
+            ViewBag.Keyword = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+                listbooks = listbooks.Where(b => b.nameBooks.Contains(searchString));
+            return View(listbooks.ToList());
         }
         public ActionResult TopicPartialView()
         {
@@ -50,7 +60,7 @@ namespace BookStores.Controllers
         public ActionResult BooksByCategory(int id)
         {
             var book = from s in db.Books where s.idBookCat == id select s;
-            return View(book);
+            return View(book.ToList());
         }
     }
 }
