@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-gold">
+                            <i class="anticon anticon-area-chart"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@string.Format("{0:#,0} VNĐ", ViewBag.SumPrice)</h2>
+                            <p class="m-b-0 text-muted">Tổng tiền thu được</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-blue">
+                            <i class="anticon anticon-book"></i>
+
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalBook</h2>
+                            <p class="m-b-0 text-muted">Tổng số sách hiện có</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-red">
+                            <i class="anticon anticon-team"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalCustomer</h2>
+                            <p class="m-b-0 text-muted">Tổng số khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-user"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalAuthor </h2>
+                            <p class="m-b-0 text-muted">Tổng số tác giả</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-exclamation-circle"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalOrderNon </h2>
+                            <p class="m-b-0 text-muted">Tổng số hóa đơn chưa xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-car"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalOrderTranSit </h2>
+                            <p class="m-b-0 text-muted">Tổng số hóa đơn đang giao hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-file-done"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalOrderSuccess </h2>
+                            <p class="m-b-0 text-muted">Tổng số hóa đơn giao thành công</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-credit-card"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">@ViewBag.TotalOrderNonPay </h2>
+                            <p class="m-b-0 text-muted">Tổng số hóa đơn chưa thanh toán</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+

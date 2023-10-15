@@ -1,0 +1,88 @@
+﻿@model BookStores.Models.Book
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <div class="card" style="margin-top:75px">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin sách muốn xóa</h4>
+                <h2 style="color:red;">@ViewBag.ThongBao</h2>
+                <div class="table-responsive">
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>Mã sách:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.codeBooks)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tên sách:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.nameBooks)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.describe)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hình ảnh:</td>
+                                <td>
+                                    <img src="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" style="max-width: 60px" alt="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số lượng:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.quantity)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giá:</td>
+                                <td>
+                                    @string.Format("{0:#,0} VNĐ", Model.price)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thể loại sách :</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.BookCategory.idBookCat)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nhà xuất bản:</td>
+                                <td>
+                                    @Html.DisplayFor(model => model.Publisher.idPublisher)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày thêm:</td>
+                                <td>
+                                    @string.Format("{0:dd-MM-yyyy}", Model.updateDay)
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

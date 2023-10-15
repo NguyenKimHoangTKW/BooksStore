@@ -1,0 +1,45 @@
+﻿@model BookStores.Models.Topic
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+   
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idTopic)
+    @Html.HiddenFor(model => model.codeTopic)
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card" style="margin-top: 75px">
+            <div class="card-body">
+                <h4>Sửa chủ đề</h4>
+                <h2 style="color:red">@ViewBag.ThongBao</h2>
+                <div class="m-t-25">
+                    <form id="form-validation">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label control-label">Tên chủ đề*</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="nameTopic" value="@Model.nameTopic">
+                                @Html.ValidationMessageFor(model => model.nameTopic, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group text-left">
+                            <button class="btn btn-success btn-tone m-r-5">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div>
+                @Html.ActionLink("Quay về danh sách sản phẩm", "Index")
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BookStores.Models.Publisher>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+<div class="card" style="margin-top:75px;">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a href="@Url.Action("Create", "Publisher")">
+                    <button class="btn btn-primary btn-tone m-r-5">
+                        <i class="anticon anticon-plus-circle m-r-5"></i>
+                        Thêm mới NXB
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>STT</th>
+                        <th>Tên NXB</th>
+                        <th>Mã NXB</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        i++;
+                        <tr>
+
+                            <td>
+                                #@i
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <h6 class="m-b-0">@item.namePublisher</h6>
+                                </div>
+                            </td>
+                            <td>@item.codePublisher</td>
+                            <td>@item.address</td>
+                            <td>@item.Phone</td>
+                            <td class="text-right">
+                                <a href="/Admin/Publisher/Edit?id=@item.idPublisher">
+                                    <button class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                        <i class="anticon anticon-edit"></i>
+                                    </button>
+                                </a>
+                                <a href="/Admin/Publisher/Delete?id=@item.idPublisher">
+                                    <button class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                        <i class="anticon anticon-delete"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

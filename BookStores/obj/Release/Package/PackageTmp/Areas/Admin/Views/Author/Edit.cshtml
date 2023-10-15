@@ -1,0 +1,61 @@
+﻿@model BookStores.Models.Author
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idAuthor)
+    @Html.HiddenFor(model => model.codeAuthor)
+    <div class="card" style="margin-top: 75px">
+        <div class="card-body">
+            <h4>Sửa đổi tác giả</h4>
+            <h2 style="color:red">@ViewBag.ThongBao</h2>
+            <div class="m-t-25">
+                <form id="form-validation">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Tên tác giả*</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="nameAuthor" value="@Model.nameAuthor">
+                            @Html.ValidationMessageFor(model => model.nameAuthor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Địa chỉ</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="address" value="@Model.address">
+                            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Tiểu sử</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="story" value="@Model.story">
+                            @Html.ValidationMessageFor(model => model.story, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Số điện thoại</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="phone" value="@Model.phone">
+                            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group text-left">
+                        <button class="btn btn-success btn-tone m-r-5">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Quay về List nhà xuất bản", "Index")
+        </div>
+    </div>
+</div>
+}

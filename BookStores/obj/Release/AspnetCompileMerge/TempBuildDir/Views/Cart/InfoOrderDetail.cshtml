@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BookStores.Models.OrderDetail>
+@{
+    ViewBag.Title = "InfoOrderDetail";
+    int i = 0;
+}
+<div class="order-details">
+    <h2>Chi tiết sản phẩm</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                i++;
+                <tr>
+                    <td>#@i</td>
+                    <td><img src="~/Areas/Style/Images/ImagesBooks/@product.Book.Thumb" alt="" style="max-width: 60px"></td>
+                    <td>@product.Book.nameBooks</td>
+                    <td>@product.quantity</td>
+                    <td>@product.price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

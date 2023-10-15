@@ -1,0 +1,130 @@
+﻿@using BookStores.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+<link href="~/Areas/Style/assets/css/app.min.css" rel="stylesheet">
+
+<h2 style="color:red;">@ViewBag.ThongBao</h2>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            @{
+                Customer customer = (Customer)Session["Customer"];
+            }
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+
+
+                <div id="invoice" class="p-h-30">
+                   
+                        <div class="m-t-15 lh-2">
+                            <div class="inline-block">
+                                <img class="img-fluid" src="assets/images/logo/logo.png" alt="">
+                                <address class="p-l-10">
+                                    <span class="font-weight-semibold text-dark"></span><br>
+                                    <span></span><br>
+                                    <span></span><br>
+                                    <abbr class="text-dark" title="Phone"></abbr>
+                                    <span></span>
+                                </address>
+                            </div>
+                            <div class="float-right">
+                                <h2>THÔNG TIN ĐƠN HÀNG</h2>
+                                <h2 style="color:red;">@ViewBag.ThongBao</h2>
+                            </div>
+                        </div>
+                        <div class="row m-t-20 lh-2">
+                            <div class="col-sm-9">
+                                <h3 class="p-l-10 m-t-10">THÔNG TIN:</h3>
+                                <address class="p-l-10 m-t-10">
+                                    <span class="font-weight-semibold text-dark">HỌ VÀ TÊN : @customer.nameCustomer </span><br>
+                                    <span>ĐỊA CHỈ : @customer.address</span><br>
+                                </address>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="m-t-80">
+                                    <div class="text-dark text-uppercase d-inline-block">
+                                        <span class="font-weight-semibold text-dark">SỐ ĐIỆN THOẠI :</span>
+                                    </div>
+                                    <div class="float-right">@customer.phone</div>
+                                </div>
+                                <div class="text-dark text-uppercase d-inline-block">
+                                    <span class="font-weight-semibold text-dark">NGÀY ĐẶT HÀNG :</span>
+                                </div>
+                                <div class="float-right">@DateTime.Now.ToShortDateString()</div>
+                            </div>
+                        </div>
+                        <div class="m-t-20">
+                            <div class="table-responsive">
+                                
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Hình</th>
+                                            <th>Tên sách</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá</th>
+                                            <th>Tổng tiền</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tbody>
+                                            <tr>
+                                                <th>#@i</th>
+                                                <td><img class="img-fluid rounded" src="~/Areas/Style/Images/ImagesBooks/@item.sAnhBia" style="max-width: 60px" alt=""></td>
+                                                <td>@item.sTenSach</td>
+                                                <td>@item.iSoLuong</td>
+                                                <td>@string.Format("{0:#,##0,0}", @item.dDonGia)</td>
+                                                <td>@string.Format("{0:#,##0,0}", @item.ThanhTien)</td>
+                                            </tr>
+                                        </tbody>
+                                    }
+                                    </table>
+                                
+                                </div>
+                            <div class="row m-t-30 lh-1-8">
+                                <div class="col-sm-12">
+                                    <div class="float-right text-right">
+                                        <p>Số lượng sách: @string.Format("{0:#,##0}", @ViewBag.TongSoLuong)</p>
+
+                                        <hr>
+                                        <h3><span class="font-weight-semibold text-dark">Tổng tiền cần thanh toán :</span> @string.Format("{0:#,##0,0} VNĐ", @ViewBag.TongTien)</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-30 lh-2">
+                                <div class="col-sm-12">
+                                    <div class="border-bottom p-v-20">
+                                        <p class="text-opacity"><small>Mọi thắc mắc xin vui lòng liên hệ số điện thoại <b>0354453116</b> để được hỗ trợ sớm nhất</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-v-20">
+                                <div class="col-sm-6">
+                                    <img class="img-fluid text-opacity m-t-5" width="100" src="assets/images/logo/logo.png" alt="">
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <small><span class="font-weight-semibold text-dark">Phone:</span> 0354453116</small>
+                                    <br>
+                                    <small>2124802010718@student.tdmu.edu.vn</small>
+                                </div>
+                            </div>
+                        </div>
+                        <tr style="height:40px;">
+                            <td></td>
+                            <td>
+                                <input type="submit" value="ĐẶT HÀNG" />
+                            </td>
+                        </tr>
+                    
+                </div>
+            }
+        </div>
+    </div>
+</div>

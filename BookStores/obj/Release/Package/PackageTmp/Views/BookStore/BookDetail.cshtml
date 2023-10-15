@@ -1,0 +1,200 @@
+﻿@model BookStores.Models.Book
+@{
+    ViewBag.Title = "Chi Tiết Sách";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Style/assets/app.min.css" rel="stylesheet" />
+    <section class="bread-crumb">
+        <div class="container">
+            <div class="evo-main-title-breadcrumb text-center">@Model.nameBooks</div>
+            <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="home" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="@Url.Action("Index","BookStore")" title="Trang chủ">
+                        <span itemprop="name">Trang chủ</span>
+                        <meta itemprop="position" content="1" />
+                    </a>
+                </li>
+
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="@Url.Action("Index","BookStore")" title="Nệm">
+                        <span itemprop="name">Bookstore</span>
+                        <meta itemprop="position" content="2" />
+
+                    </a>
+                </li>
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <strong>
+                        <span itemprop="name">@Model.nameBooks</span>
+                        <meta itemprop="position" content="3" />
+                    </strong>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+    <section class="container ant-product-page product product-margin" itemscope itemtype="http://schema.org/Product">
+
+        <div class="evo-bg">
+            <div class="row ant-image-and-info-product">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-12 ant-mobile-padding">
+                    <div class="product-image-block relative">
+
+                        <div class="swiper-container gallery-top">
+                            <div class="swiper-wrapper" id="lightgallery">
+
+                                <a class="swiper-slide" data-hash="0" href="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" title="Click để xem">
+                                    <img height="480" width="480" src="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" alt="@Model.nameBooks" data-image="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" class="img-responsive mx-auto d-block swiper-lazy" />
+                                </a>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-12 details-pro">
+                    <div class="ant-info-product">
+                        <h1 class="title-head">@Model.nameBooks</h1>
+
+
+                        <div>
+
+                            <div class="inventory_quantity d-none">
+
+                                <span class="a-stock a2">Còn hàng</span>
+
+                            </div>
+                            <div class="price-box clearfix">
+
+                                <span class="special-price">
+                                    <span class="price product-price">@string.Format("{0:#,0 VNĐ}", Model.price)</span>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="summary">
+                            <p>
+                                @Model.describe
+                            </p>
+                        </div>
+                        <div class="form-groups clearfix">
+                      
+                            <div class="btn-mua">
+                                <a href="@Url.Action("AddCart","Cart", new { ms = Model.idBooks, url = Request.Url.ToString() })">
+                                    <button class="btn btn-primary btn-tone m-r-5" style="text-align: center">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="ant-product-tab">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" title="Thông tin sản phẩm">Thông tin sản phẩm</a>
+                </li>
+
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" title="Chính sách đổi trả và bảo hành">Chính sách đổi trả và bảo hành</a>
+                </li>
+
+
+            
+
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+
+                    <p>- Mua hàng <strong>ONLINE</strong>: Quý khách chỉ cần Click vào nút <u><strong>THÊM VÀO GIỎ HÀNG</strong></u> và vào giỏ hàng check sản phẩm trước khi đặt hàng</p>
+                    <p>- Gọi hoặc nhắn tin tới SĐT: <span style="font-size:16px;"><strong><u>0354.453.116</u></strong></span> để được&nbsp;tư vấn&nbsp;mua hàng</p>
+                    <p>
+                        <br />
+                        
+                    </p>
+
+                </div>
+
+
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+
+                    <p><u><strong>CHÍNH SÁCH ĐỔI HÀNG.</strong></u></p>
+                    <p><strong>Quý khách có thể đổi hàng đã mua trong các trường hợp sau:</strong></p>
+                    <ul>
+                        <li>Hàng có lỗi kỹ thuật do nhà sản xuất,</li>
+                        <li>Hàng bị giao nhầm, nhầm size.</li>
+                    </ul>
+                    <p>Thời hạn đổi hàng : 05 ngày kể từ ngày mua/nhận hàng</p>
+                    <p><strong>Điều kiện đổi hàng:</strong></p>
+                    <ul>
+                        <li>Hàng chưa qua sử dụng, giặt ủi, phải còn nguyên tem mác, không dính bẩn,…</li>
+                        <li>Hàng đổi phải có giá bằng hoặc cao hơn hàng đã mua</li>
+                    </ul>
+                    <p><strong>Phí đổi hàng:</strong></p>
+                    <ul>
+                        <li>Nếu hàng bị lỗi kỹ thuật do nhà sản xuất: miễn phí toàn bộ phí chuyển hàng (gửi trả và giao hàng)</li>
+                        <li>Trường hợp khác Quý khách hàng sẽ chịu chi phí&nbsp;chuyển hàng (gửi trả và giao hàng).</li>
+                    </ul>
+                    <p>
+                        <strong>Địa điểm nhận hàng đổi:</strong><br />
+                        Công ty TNHH May Mặc Thăng Long<br />
+                        62/4 Trần Bình Trọng, Phường 8, TP. Vũng Tàu.<br />
+                        Điện thoại: 02543 583 216<br />
+                        Fax: 02543 581 475<br />
+                        Hotline: 0937 809 123
+                    </p>
+                    <p><em>Xin Quý Khách Hàng lưu ý: Chúng tôi không hỗ trợ Quý khách trả lại hàng.</em></p>
+                    <p><u><strong>CHÍNH SÁCH BẢO HÀNH.</strong></u></p>
+                    <ul>
+                        <li>Hàng có lỗi kỹ thuật do nhà sản xuất.</li>
+                        <li>Thời hạn bảo hành dây kéo&nbsp;: trọn đời.</li>
+                    </ul>
+                    <p>&nbsp; &nbsp; &nbsp;<strong>Phí bảo hành:</strong></p>
+                    <ul>
+                        <li>Nếu hàng bị lỗi kỹ thuật do nhà sản xuất: miễn phí toàn bộ phí chuyển hàng (gửi trả và giao hàng)</li>
+                        <li>Trường hợp khác Quý khách hàng sẽ chịu chi phí&nbsp;chuyển hàng (gửi trả và giao hàng).</li>
+                    </ul>
+                    <p><strong>Chân thành cảm ơn Quý Khách Hàng đã quan tâm đến các sản phẩm nhãn hiệu Pet Shop.</strong></p>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+}
+
+
+<div class="backdrop__body-backdrop___1rvky"></div>
+<link rel="preload" as="script" href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/api-jqueryb828.js?1687579687145" />
+<script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/api-jqueryb828.js?1687579687145" type="text/javascript"></script>
+
+
+<link rel="preload" as="script" href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/evo-productb828.js?1687579687145" />
+<script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/evo-productb828.js?1687579687145" type="text/javascript"></script>
+<link rel="preload" as="style" type="text/css" href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/picbox.scssb828.css?1687579687145" />
+<link href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/picbox.scssb828.css?1687579687145" rel="stylesheet" type="text/css" media="all" />
+<link rel="preload" as="script" href="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/picboxb828.js?1687579687145" />
+<script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/picboxb828.js?1687579687145" type="text/javascript"></script>
+
+
+
+
+
+

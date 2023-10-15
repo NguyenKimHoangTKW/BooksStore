@@ -1,0 +1,101 @@
+﻿@model IEnumerable<BookStores.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+<div class="card" style="margin-top:75px;">
+<div class="card-body">
+    <div class="row m-b-30">
+        <div class="col-lg-8">
+            <div class="d-md-flex">
+                <div class="m-b-10">
+
+                    @using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        @Html.DropDownList("bookid", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 180px;" })
+
+                        <button class="btn btn-success btn-tone m-r-5">Tìm</button>
+                        @Html.DropDownList("nxbid", null, htmlAttributes: new { @class = "form-control", @style = "min-width: 180px;" })
+
+                        <button class="btn btn-success btn-tone m-r-5">Tìm</button>
+
+                    }
+                    @using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+
+                        <button class="btn btn-warning btn-tone m-r-5" style="margin-top:13px;">Reset</button>
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
+            <a href="@Url.Action("Create", "Books")">
+                <button class="btn btn-primary btn-tone m-r-5">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    Thêm mới sách
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover e-commerce-table">
+            <thead>
+                <tr>
+
+                    <th>STT</th>
+                    <th>Tên sách</th>
+                    <th>Mã sách</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Ngày thêm sách</th>
+                    <th>Thể loại sách</th>
+                    <th>NXB</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+
+                        <td>
+                            #@i
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid rounded" src="~/Areas/Style/Images/ImagesBooks/@item.Thumb" style="max-width: 60px" alt="">
+                                <h6 class="m-b-0">@item.nameBooks</h6>
+                            </div>
+                        </td>
+                        <td>@item.codeBooks</td>
+                        <td>@item.quantity</td>
+                        <td>@item.price</td>
+                        <td>@string.Format("{0:dd-MM-yyyy}", item.updateDay)</td>
+                        <td>@item.BookCategory.nameBookCat</td>
+                        <td>@item.Publisher.namePublisher</td>
+                        <td class="text-right">
+                            <a href="/Admin/Books/Edit?id=@item.idBooks">
+                                <button class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                    <i class="anticon anticon-edit"></i>
+                                </button>
+                            </a>
+                            <a href="/Admin/Books/Delete?id=@item.idBooks">
+                                <button class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                    <i class="anticon anticon-delete"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

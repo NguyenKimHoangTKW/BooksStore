@@ -1,0 +1,36 @@
+.pagination-container {
+    text-align: center; /* Để căn giữa phân trang */
+}
+
+/* Tùy chỉnh kiểu dáng cho phân trang */
+.pagination {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .pagination li {
+        display: inline;
+        margin: 0 3px; /* Khoảng cách giữa các trang */
+    }
+
+    .pagination a {
+        text-decoration: none;
+        padding: 5px 10px;
+        background-color: #F4EEF6; /* Màu nền của nút phân trang */
+        color: black; /* Màu chữ */
+        border: 1px solid #337ab7; /* Viền nút phân trang */
+        border-radius: 100%; /* Bo góc nút */
+    }
+
+        .pagination a:hover {
+            background-color: #E7F3F1; /* Màu nền khi di chuột qua */
+        }
+
+    .pagination .disabled a {
+        background-color: #ccc;
+        color: #333;
+        border: 1px solid #ccc;
+        pointer-events: none; /* Ngăn chặn sự tương tác khi bị vô hiệu hóa */
+    }

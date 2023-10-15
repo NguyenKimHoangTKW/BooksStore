@@ -1,0 +1,67 @@
+﻿@model BookStores.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.codeOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codeOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.checkPay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkPay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.orderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.codeCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.codeCustomer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idOrder }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BookStores.Models.BookCategory>
+
+@{
+    Layout = null;
+}
+        @foreach (var item in Model)
+        {
+            <a class="nav-link" href="@Url.Action("BooksByCategory","BookStore", new {id=item.idBookCat})" title="@item.nameBookCat">@item.nameBookCat</a>
+        }

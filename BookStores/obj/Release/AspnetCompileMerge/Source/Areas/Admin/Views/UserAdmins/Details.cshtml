@@ -1,0 +1,67 @@
+﻿@model BookStores.Models.UserAdmin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserAdmin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.codeAdmin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codeAdmin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nameAdmin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameAdmin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passWord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passWord)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.access)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.access)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAdmin }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

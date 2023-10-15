@@ -1,0 +1,38 @@
+﻿@model BookStores.Models.Publisher
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card" style="margin-top:75px;">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin nhà xuất bản</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>Mã nhà xuất bản</td>
+                        <td class="text-dark font-weight-semibold">@Html.DisplayFor(model => model.codePublisher)</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhà xuất bản</td>
+                        <td>@Html.DisplayFor(model => model.namePublisher)</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td>@Html.DisplayFor(model => model.address)</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td>@Html.DisplayFor(model => model.Phone)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.idPublisher }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

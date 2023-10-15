@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BookStores.Models.OrderDetail>
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 0;
+}
+
+
+<div class="table-responsive" style="margin-top:75px;">
+    <table class="table table-hover e-commerce-table">
+        <thead>
+            <tr>
+
+                <th>STT</th>
+                <th>Tên sách</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                i++;
+                <tr>
+
+                    <td>
+                        #@i
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid rounded" src="~/Areas/Style/Images/ImagesBooks/@item.Book.Thumb" style="max-width: 60px" alt="">
+                            <h6 class="m-b-0">@item.Book.nameBooks</h6>
+                        </div>
+                    </td>
+                    <td>@item.quantity</td>
+                    <td>@item.price</td>
+
+                </tr>
+
+            }
+            <tr>
+                <td colspan="4" style="text-align:center;">
+                    <p>Xác nhận đã thanh toán</p>
+                    <a href="@Url.Action("OrderDetailSuccessPay", "Orders", new { id = Model.FirstOrDefault().idOrder })">
+                        <button class="btn btn-success btn-tone m-r-5">Xác nhận</button>
+                    </a>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+

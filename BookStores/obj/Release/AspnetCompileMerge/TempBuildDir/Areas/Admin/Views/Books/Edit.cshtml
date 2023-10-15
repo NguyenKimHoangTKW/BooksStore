@@ -1,0 +1,98 @@
+﻿@model BookStores.Models.Book
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idBooks)
+    @Html.HiddenFor(model => model.codeBooks)
+    <div class="card">
+        <div class="card-body"  style="margin-top: 90px">
+            <h4>Sửa thông tin sách</h4>
+            <h2 style="color:red">@ViewBag.ThongBao</h2>
+            <div class="m-t-15">
+                <form id="form-validation">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Tên sách*</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="nameBooks" value="@Model.nameBooks">
+                            @Html.ValidationMessageFor(model => model.nameBooks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Mô tả*</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="describe" value="@Model.describe">
+                            @Html.ValidationMessageFor(model => model.describe, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Ảnh sách*</label>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Thumb, null, new { type = "file", @class = "form-control" })
+                            <img src="~/Areas/Style/Images/ImagesBooks/@Model.Thumb" style="max-width: 60px" alt="">
+                            @Html.Hidden("oldimage", @Model.Thumb)
+                            @Html.ValidationMessageFor(model => model.Thumb, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Số lượng sách*</label>
+                        <div class="col-md-5">
+                            <input type="number" class="form-control" name="quantity" value="@Model.quantity">
+                            @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Giá sách*</label>
+                        <div class="col-md-5">
+                            <input type="number" class="form-control" name="price" value="@Model.price">
+                            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Chủ đề sách*</label>
+                        <div class="col-md-5">
+                            @Html.DropDownList("idBookCat", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.idBookCat, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Nhà xuất bản*</label>
+                        <div class="col-md-5">
+                            @Html.DropDownList("idPublisher", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.idPublisher, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label control-label">Ngày thêm sách*</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="updateDay" value="@string.Format("{0:yyyy-MM-dd}",Model.updateDay)">
+                            @Html.ValidationMessageFor(model => model.updateDay, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <button class="btn btn-success btn-tone m-r-5">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Quay về danh sách sản phẩm", "Index")
+        </div>
+    </div>
+</div>
+}

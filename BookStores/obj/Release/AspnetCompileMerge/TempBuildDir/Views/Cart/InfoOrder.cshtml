@@ -1,0 +1,134 @@
+﻿@model IEnumerable<BookStores.Models.Order>
+@{
+    ViewBag.Title = "InfoOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+<link href="~/Areas/Style/assets/vendors/select2/select2.css" rel="stylesheet">
+
+<!-- Core css -->
+<link href="~/Areas/Style/assets/css/app.min.css" rel="stylesheet">
+<script src="~/Areas/Style/assets/js/vendors.min.js"></script>
+
+<!-- page js -->
+<script src="~/Areas/Style/assets/vendors/select2/select2.min.js"></script>
+<script src="~/Areas/Style/assets/vendors/quill/quill.min.js"></script>
+<script src="~/Areas/Style/assets/js/pages/e-commerce-product-edit.js"></script>
+<!-- Core JS -->
+<script src="~/Areas/Style/assets/js/app.min.js"></script>
+@{ var usernamecus = Session["Customer"] as BookStores.Models.Customer;}
+<div class="main-content" style=" margin-top: 20px;">
+    <form>
+        <div class="page-header no-gutters has-tab">
+            <ul class="nav nav-tabs" style="margin-left: 600px;">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Tất cả đơn hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#product-edit-option">Đơn hàng chưa xử lý</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#product-edit-description">Đơn hàng đang giao</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#product-edit-succesfully">Đơn hàng giao thành công</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content m-t-15">
+            <div class="tab-pane fade show active" id="product-edit-basic">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Tên khách hàng</th>
+                                        <th scope="col">Ngày đặt hàng</th>
+                                        <th scope="col">Ngày giao dự kiến</th>
+                                        <th scope="col">Trạng thái giao hàng</th>
+                                        <th scope="col">Trạng thái thanh toán</th>
+                                        <th scope="col">Chi tiết</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">#@i</th>
+                                            <th scope="row">@item.Customer.nameCustomer</th>
+                                            <td>@string.Format("{0:dd-MM-yyyyy}", item.orderDate)</td>
+                                            <td>@string.Format("{0:dd-MM-yyyyy}", item.deliveryDate)</td>
+                                            <td>@item.deliveryStatus</td>
+                                            @if (item.checkPay == true)
+                                            {
+                                                <td>Đã thanh toán</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Chưa thanh toán </td>
+                                            }
+                                            <td><a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">Chi tiết</a></td>
+                                        </tr>
+                                    </tbody>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="product-edit-option">
+                <div class="card">
+                    <div class="card-body">
+                        @Html.Action("InfoOrderPartial", "Cart", new { id = usernamecus.idCustomer })
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="product-edit-description">
+                <div class="card">
+                    <div class="card-body">
+                        @Html.Action("OrderInTransitPatial", "Cart", new { id = usernamecus.idCustomer })
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="product-edit-succesfully">
+                <div class="card">
+                    <div class="card-body">
+                        @Html.Action("OrderSuccessfullyPartial", "Cart", new { id = usernamecus.idCustomer })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="product-details-container"></div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".order-details-link").click(function () {
+            var orderId = $(this).data("id");
+            var detailsContainer = $("#product-details-container");
+
+            // Kiểm tra nếu form đã hiển thị, thì ẩn nó đi
+            if (detailsContainer.is(":visible")) {
+                detailsContainer.hide();
+            } else {
+                // Nếu form không hiển thị, gọi AJAX để lấy thông tin sản phẩm
+                $.ajax({
+                    url: "@Url.Action("InfoOrderDetail", "Cart")",
+                    data: { id: orderId },
+                    type: "GET",
+                    success: function (data) {
+                        detailsContainer.html(data);
+                        detailsContainer.show(); // Hiển thị form
+                    },
+                    error: function () {
+                        alert("An error occurred while loading product details.");
+                    }
+                });
+            }
+        });
+    });
+</script>
