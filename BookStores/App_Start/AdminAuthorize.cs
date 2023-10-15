@@ -12,7 +12,7 @@ namespace BookStores.App_Start
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            Admin admin = (Admin)HttpContext.Current.Session["Admin"];
+            UserAdmin admin = (UserAdmin)HttpContext.Current.Session["Admin"];
             if (admin != null)
             {
                 return;

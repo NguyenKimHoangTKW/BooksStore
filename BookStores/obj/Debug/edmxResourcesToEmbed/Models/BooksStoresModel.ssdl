@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="dbBookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Admin">
-    <Key>
-      <PropertyRef Name="idAdmin" />
-    </Key>
-    <Property Name="idAdmin" Type="int" Nullable="false" />
-    <Property Name="codeAdmin" Type="char" MaxLength="13" Nullable="false" />
-    <Property Name="nameAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="access" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="Author">
     <Key>
       <PropertyRef Name="idAuthor" />
@@ -77,10 +65,9 @@
   <EntityType Name="OrderDetail">
     <Key>
       <PropertyRef Name="idOrder" />
-      <PropertyRef Name="idBooks" />
     </Key>
     <Property Name="idOrder" Type="int" Nullable="false" />
-    <Property Name="idBooks" Type="int" Nullable="false" />
+    <Property Name="idBooks" Type="int" />
     <Property Name="quantity" Type="int" Nullable="false" />
     <Property Name="price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
   </EntityType>
@@ -111,6 +98,18 @@
     <Property Name="idTopic" Type="int" Nullable="false" />
     <Property Name="codeTopic" Type="char" MaxLength="13" Nullable="false" />
     <Property Name="nameTopic" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAdmin">
+    <Key>
+      <PropertyRef Name="idAdmin" />
+    </Key>
+    <Property Name="idAdmin" Type="int" Nullable="false" />
+    <Property Name="codeAdmin" Type="char" MaxLength="13" Nullable="false" />
+    <Property Name="nameAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="access" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="WriteBook">
     <Key>
@@ -171,7 +170,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderDetail_Books">
-    <End Role="Books" Type="Self.Books" Multiplicity="1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Books">
@@ -184,7 +183,7 @@
   </Association>
   <Association Name="FK_OrderDetail_Order">
     <End Role="Order" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Order">
         <PropertyRef Name="idOrder" />
@@ -219,7 +218,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="dbBookStoreModelStoreContainer">
-    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
@@ -229,6 +227,7 @@
     <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAdmin" EntityType="Self.UserAdmin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WriteBook" EntityType="Self.WriteBook" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_BookCategory_Topic" Association="Self.FK_BookCategory_Topic">
       <End Role="Topic" EntitySet="Topic" />

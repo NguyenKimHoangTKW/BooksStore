@@ -138,9 +138,17 @@ namespace BookStores.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Publisher publisher = db.Publishers.Find(id);
-            db.Publishers.Remove(publisher);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if(db.Books.Any(b => b.idPublisher == publisher.idPublisher))
+            {
+                ViewBag.ThongBao = "Không thể xóa vì bị trùng khóa ngoại bên Sách";
+            }
+            else
+            {
+                db.Publishers.Remove(publisher);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+           return View(publisher);
         }
 
         protected override void Dispose(bool disposing)

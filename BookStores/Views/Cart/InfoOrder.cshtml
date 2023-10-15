@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "InfoOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
 }
 <link href="~/Areas/Style/assets/vendors/select2/select2.css" rel="stylesheet">
 
@@ -42,6 +43,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th scope="col">STT</th>
                                         <th scope="col">Tên khách hàng</th>
                                         <th scope="col">Ngày đặt hàng</th>
                                         <th scope="col">Ngày giao dự kiến</th>
@@ -52,8 +54,10 @@
                                 </thead>
                                 @foreach (var item in Model)
                                 {
+                                    i++;
                                     <tbody>
                                         <tr>
+                                            <th scope="row">#@i</th>
                                             <th scope="row">@item.Customer.nameCustomer</th>
                                             <td>@string.Format("{0:dd-MM-yyyyy}", item.orderDate)</td>
                                             <td>@string.Format("{0:dd-MM-yyyyy}", item.deliveryDate)</td>
@@ -66,7 +70,7 @@
                                             {
                                                 <td>Chưa thanh toán </td>
                                             }
-                                            <td><a href="@Url.Action("InfoOrderDetail", "Cart", new {id = item.idOrder})">asdasdasds</a></td>
+                                            <td><a href="javascript:void(0);" class="order-details-link" data-id="@item.idOrder">Chi tiết</a></td>
                                         </tr>
                                     </tbody>
                                 }
@@ -98,5 +102,33 @@
                 </div>
             </div>
         </div>
+        <div id="product-details-container"></div>
     </form>
 </div>
+<script>
+    $(document).ready(function () {
+        $(".order-details-link").click(function () {
+            var orderId = $(this).data("id");
+            var detailsContainer = $("#product-details-container");
+
+            // Kiểm tra nếu form đã hiển thị, thì ẩn nó đi
+            if (detailsContainer.is(":visible")) {
+                detailsContainer.hide();
+            } else {
+                // Nếu form không hiển thị, gọi AJAX để lấy thông tin sản phẩm
+                $.ajax({
+                    url: "@Url.Action("InfoOrderDetail", "Cart")",
+                    data: { id: orderId },
+                    type: "GET",
+                    success: function (data) {
+                        detailsContainer.html(data);
+                        detailsContainer.show(); // Hiển thị form
+                    },
+                    error: function () {
+                        alert("An error occurred while loading product details.");
+                    }
+                });
+            }
+        });
+    });
+</script>

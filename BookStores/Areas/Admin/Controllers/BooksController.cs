@@ -75,7 +75,11 @@ namespace BookStores.Areas.Admin.Controllers
                 book.idBooks = nextId;
                 book.codeBooks = "SACH" + nextId.ToString("2023BS");
                 book.updateDay = DateTime.Now;
-                if (Thumb != null && Thumb.ContentLength > 0)
+                if (db.Books.SingleOrDefault(b => b.nameBooks == book.nameBooks) != null)
+                {
+                    ViewBag.ThongBao = "Sách này đã tồn tại, vui long nhập sách mới";
+                }
+                else if (Thumb != null && Thumb.ContentLength > 0)
                 {
                     string _Head = Path.GetFileNameWithoutExtension(Thumb.FileName);
                     string _Tail = Path.GetExtension(Thumb.FileName);
@@ -190,9 +194,21 @@ namespace BookStores.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Book book = db.Books.Find(id);
-            db.Books.Remove(book);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if(db.WriteBooks.Any(a => a.idBooks == book.idBooks))
+            {
+                ViewBag.ThongBao = "Không thể xóa sách vì liên quan đến khóa ngoại của 'Người viết sách', vui lòng kiểm tra lại";
+            }
+            else if(db.OrderDetails.Any(a => a.idBooks == book.idBooks))
+            {
+                ViewBag.ThongBao = "Không thể xóa sách vì liên quan đến khóa ngoại của 'Chi Tiết hóa đơn', bạn hãy cập nhật số lượng sách xuống 0 thay vì xóa";
+            }
+            else
+            {
+                db.Books.Remove(book);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(book);
         }
 
         protected override void Dispose(bool disposing)

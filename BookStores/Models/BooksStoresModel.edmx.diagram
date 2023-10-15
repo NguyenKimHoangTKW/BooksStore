@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="10158ca8d7ab48cfa32f342e69018fd4" Name="Diagram1">
-        <EntityTypeShape EntityType="dbBookStoreModel.Admin" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="dbBookStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="dbBookStoreModel.Publisher" Width="1.5" PointX="8.375" PointY="4.875" />
         <EntityTypeShape EntityType="dbBookStoreModel.Author" Width="1.5" PointX="0.75" PointY="8" />
@@ -19,10 +18,11 @@
         <EntityTypeShape EntityType="dbBookStoreModel.BookCategory" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="dbBookStoreModel.FK_BookCategory_Topic" />
         <AssociationConnector Association="dbBookStoreModel.FK_Books_BookCategory" />
-        <EntityTypeShape EntityType="dbBookStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="10.75" />
-        <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Books" />
         <EntityTypeShape EntityType="dbBookStoreModel.Order" Width="1.5" PointX="3" PointY="11.5" />
         <AssociationConnector Association="dbBookStoreModel.FK_Order_Customer" />
+        <EntityTypeShape EntityType="dbBookStoreModel.UserAdmin" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="dbBookStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="8.75" />
+        <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Books" />
         <AssociationConnector Association="dbBookStoreModel.FK_OrderDetail_Order" />
         </Diagram>
     </edmx:Diagrams>

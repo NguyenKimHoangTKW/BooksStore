@@ -136,12 +136,20 @@ namespace BookStores.Areas.Admin.Controllers
         // POST: Admin/Topic/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Topic topics ,int id)
         {
             Topic topic = db.Topics.Find(id);
-            db.Topics.Remove(topic);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if(db.BookCategories.Any(tp => tp.idTopic == topic.idTopic))
+            {
+                ViewBag.ThongBao = "Không thể xóa vì bị trùng khóa ngoại bên Thể loại sách";
+            }
+            else
+            {
+                db.Topics.Remove(topic);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(topic);
         }
 
         protected override void Dispose(bool disposing)

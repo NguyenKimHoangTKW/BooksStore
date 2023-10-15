@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="dbBookStoreModelStoreContainer" CdmEntityContainer="dbBookStoreEntities">
-    <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="dbBookStoreModel.Admin">
-        <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
-          <ScalarProperty Name="codeAdmin" ColumnName="codeAdmin" />
-          <ScalarProperty Name="nameAdmin" ColumnName="nameAdmin" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="passWord" ColumnName="passWord" />
-          <ScalarProperty Name="access" ColumnName="access" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="dbBookStoreModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -110,16 +97,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
-        <MappingFragment StoreEntitySet="OrderDetail">
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
-          <ScalarProperty Name="idBooks" ColumnName="idBooks" />
-          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="dbBookStoreModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -129,6 +106,29 @@
           <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
           <ScalarProperty Name="checkPay" ColumnName="checkPay" />
           <ScalarProperty Name="codeOrder" ColumnName="codeOrder" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAdmins">
+      <EntityTypeMapping TypeName="dbBookStoreModel.UserAdmin">
+        <MappingFragment StoreEntitySet="UserAdmin">
+          <ScalarProperty Name="access" ColumnName="access" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="nameAdmin" ColumnName="nameAdmin" />
+          <ScalarProperty Name="codeAdmin" ColumnName="codeAdmin" />
+          <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="idBooks" ColumnName="idBooks" />
           <ScalarProperty Name="idOrder" ColumnName="idOrder" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -60,9 +60,11 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="@Url.Action("Index", "Customers")">Danh sách khách hàng</a>
+                        <a href="@Url.Action("Index", "Customer")">Danh sách User khách hàng</a>
                     </li>
-
+                    <li>
+                        <a href="@Url.Action("Index", "UserAdmins")">Danh sách User Admin</a>
+                    </li>
                 </ul>
             </li>
 
@@ -70,16 +72,17 @@
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="fas fa-user-lock"></i>
+                        <i class="anticon anticon-shopping-cart"></i>
                     </span>
-                    <span class="title">Quản lý Order</span>
+                    <span class="title">Quản lý hóa đơn</span>
                     <span class="arrow">
                         <i class="arrow-icon"></i>
                     </span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="@Url.Action("Index", "Orders")">Thông tin Order</a>
+
+                        <a href="@Url.Action("Index", "Orders")">Danh sách tất cả hóa đơn</a>
                     </li>
                     <li>
                         <a href="@Url.Action("OrderNon", "Orders")">Danh sách hóa đơn chưa xử lý</a>
@@ -91,7 +94,7 @@
                         <a href="@Url.Action("OrderSuccessfully", "Orders")">Danh sách hóa đơn giao thành công</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "OrderDetails")">Chi tiết Order</a>
+                        <a href="@Url.Action("OrderNonPay", "Orders")">Danh sách hóa đơn chưa thanh toán</a>
                     </li>
 
                 </ul>

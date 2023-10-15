@@ -14,12 +14,6 @@ namespace BookStores.Models
     
     public partial class Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            this.OrderDetails = new HashSet<OrderDetail>();
-        }
-    
         public int idOrder { get; set; }
         public string codeOrder { get; set; }
         public bool checkPay { get; set; }
@@ -29,7 +23,6 @@ namespace BookStores.Models
         public int idCustomer { get; set; }
     
         public virtual Customer Customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

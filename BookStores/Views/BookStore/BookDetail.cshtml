@@ -3,7 +3,7 @@
     ViewBag.Title = "Chi Tiết Sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Style/assets/app.min.css" rel="stylesheet" />
     <section class="bread-crumb">
         <div class="container">
             <div class="evo-main-title-breadcrumb text-center">@Model.nameBooks</div>
@@ -84,7 +84,11 @@
                         <div class="form-groups clearfix">
                       
                             <div class="btn-mua">
-                                <a href="@Url.Action("AddCart","Cart", new { ms = Model.idBooks, url = Request.Url.ToString() })">Thêm vào giỏ</a>
+                                <a href="@Url.Action("AddCart","Cart", new { ms = Model.idBooks, url = Request.Url.ToString() })">
+                                    <button class="btn btn-primary btn-tone m-r-5" style="text-align: center">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </a>
 
                             </div>
                         </div>
@@ -106,9 +110,7 @@
                 </li>
 
 
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4" role="tab" aria-controls="contact4" aria-selected="false" title=" Hướng dẫn bảo quản"> Hướng dẫn bảo quản</a>
-                </li>
+            
 
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -116,21 +118,11 @@
 
 
 
-                    <p>- Mua hàng <strong>ONLINE</strong>: Quý khách chỉ cần Click vào nút <u><strong>MUA HÀNG</strong></u></p>
-                    <p>- Gọi hoặc nhắn tin tới SĐT: <span style="font-size:16px;"><strong><u>0937.809.123</u></strong></span> để được&nbsp;tư vấn&nbsp;mua hàng</p>
+                    <p>- Mua hàng <strong>ONLINE</strong>: Quý khách chỉ cần Click vào nút <u><strong>THÊM VÀO GIỎ HÀNG</strong></u> và vào giỏ hàng check sản phẩm trước khi đặt hàng</p>
+                    <p>- Gọi hoặc nhắn tin tới SĐT: <span style="font-size:16px;"><strong><u>0354.453.116</u></strong></span> để được&nbsp;tư vấn&nbsp;mua hàng</p>
                     <p>
                         <br />
-                        <span style="font-size:16px;">
-                            <span style="color:#c0392b;">
-                                <u><strong>Lưu ý:</strong></u><br />
-                                <strong>
-                                    <em>
-                                        - Để được bền màu sản phẩm Petshop hàng 100% cotton không nên dùng xà bông(xà phòng), nước giặt có chất tẩy.&nbsp;<br />
-                                        - Nên phơi trong bóng râm, tránh phơi sản phẩm&nbsp;ra nơi có ánh nắng chiếu trực tiếp.
-                                    </em>
-                                </strong>
-                            </span>
-                        </span>
+                        
                     </p>
 
                 </div>
@@ -182,146 +174,9 @@
                 </div>
 
 
-                <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab4">
-
-
-
-                    <p>
-                        <span style="color:#c0392b;">
-                            <u><strong>Lưu ý:</strong></u><br />
-                            <strong>
-                                <em>
-                                    - Để được bền màu sản phẩm Petshop hàng 100% cotton không nên dùng xà bông(xà phòng), nước giặt có chất tẩy.&nbsp;<br />
-                                    - Nên phơi trong bóng râm, tránh phơi sản phẩm&nbsp;ra nơi có ánh nắng chiếu trực tiếp.
-                                </em>
-                            </strong>
-                        </span>
-                    </p>
-
-
-                </div>
-
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="ant-similar-product">
-            <div class="home-title"><a href="nem.html" title="Sản phẩm liên quan">Sản phẩm liên quan</a></div>
-            <div class="ant-similar-product-swiper swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="evo-product-block-item">
-                            <a href="javascript:void(0)" title="Yêu thích" data-handle="Khởi nghiệp bán lẻ" class="action btn-compare js-btn-wishlist">
-                            </a>
-                            <a href="khoi-nghiep-ban-le.html" title="Khởi nghiệp bán lẻ" class="product-transition">
-                                <img class="product-thumbnail lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/khoi-nghiep-ban-le.png?v=1690951897260" alt="Khởi nghiệp bán lẻ" />
-                            </a>
-                            <div class="product-info">
-                                <a href="khoi-nghiep-ban-le.html" title="Khởi nghiệp bán lẻ" class="ant-item-product-name">Khởi nghiệp bán lẻ</a>
-                                <div class="product__price">
-                                    <span class="price">458.000₫</span>
-                                </div>
-                            </div>
-                            <form action="https://petshop.vn/cart/add" method="post" enctype="multipart/form-data" class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart" data-id="product-actions-32094825">
-
-                                <input type="hidden" name="variantId" value="94793000" />
-                                <a href="khoi-nghiep-ban-le.html" class="action add_to_cart cart-button" rel="nofollow" title="Mua ngay">Mua ngay</a>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="evo-product-block-item">
-                            <a href="javascript:void(0)" title="Yêu thích" data-handle="nemmeotim-knbbmt" class="action btn-compare js-btn-wishlist">
-                            </a>
-                            <a href="nemmeotim-knbbmt.html" title="NỆM M&#200;O TIM KNBB-MT" class="product-transition">
-                                <img class="product-thumbnail lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="//bizweb.dktcdn.net/thumb/large/100/147/060/products/354239573-606588168236690-5761954187133929027-n.jpg?v=1687156344847" alt="NỆM M&#200;O TIM KNBB-MT" />
-                            </a>
-                            <div class="product-info">
-                                <a href="nemmeotim-knbbmt.html" title="NỆM M&#200;O TIM KNBB-MT" class="ant-item-product-name">NỆM M&#200;O TIM KNBB-MT</a>
-                                <div class="product__price">
-
-
-                                    <span class="price">950.000₫</span>
-
-
-                                </div>
-                            </div>
-                            <form action="https://petshop.vn/cart/add" method="post" enctype="multipart/form-data" class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart" data-id="product-actions-31456568">
-
-
-                                <a href="nemmeotim-knbbmt.html" class="action cart-button" rel="nofollow" title="Tùy chọn">Tùy chọn</a>
-
-
-                            </form>
-                        </div>
-                    </div>
-
-
-
-                    <div class="swiper-slide">
-                        <div class="evo-product-block-item">
-                            <a href="javascript:void(0)" title="Yêu thích" data-handle="set-nem-tre-em-ncz-048-ghep-le" class="action btn-compare js-btn-wishlist">
-
-                            </a>
-                            <a href="set-nem-tre-em-ncz-048-ghep-le.html" title="SET NỆM TRẺ EM NCZ-048( GH&#201;P LẺ)" class="product-transition">
-                                <img class="product-thumbnail lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="//bizweb.dktcdn.net/thumb/large/100/147/060/products/ncz-048m-plus-tz-665p-plus-noz-047lp-s.jpg?v=1624086538497" alt="SET NỆM TRẺ EM NCZ-048( GH&#201;P LẺ)" />
-                            </a>
-                            <div class="product-info">
-                                <a href="set-nem-tre-em-ncz-048-ghep-le.html" title="SET NỆM TRẺ EM NCZ-048( GH&#201;P LẺ)" class="ant-item-product-name">SET NỆM TRẺ EM NCZ-048( GH&#201;P LẺ)</a>
-                                <div class="product__price">
-
-
-                                    <span class="price">1.250.000₫</span>
-
-
-                                </div>
-                            </div>
-                            <form action="https://petshop.vn/cart/add" method="post" enctype="multipart/form-data" class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart" data-id="product-actions-22055565">
-
-
-                                <input type="hidden" name="variantId" value="47549350" />
-                                <a href="set-nem-tre-em-ncz-048-ghep-le.html" class="action add_to_cart cart-button" rel="nofollow" title="Mua ngay">Mua ngay</a>
-
-
-                            </form>
-                        </div>
-                    </div>
-
-
-
-                    <div class="swiper-slide">
-
-                        <div class="evo-product-block-item">
-                            <a href="javascript:void(0)" title="Yêu thích" data-handle="set-nem-tre-em-ncz-202-ghep-le" class="action btn-compare js-btn-wishlist">
-
-                            </a>
-                            <a href="set-nem-tre-em-ncz-202-ghep-le.html" title="SET NỆM TRẺ EM NCZ-202 (GH&#201;P LẺ)" class="product-transition">
-                                <img class="product-thumbnail lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="//bizweb.dktcdn.net/thumb/large/100/147/060/products/ncz-202m-plus-noz-040lp-s-plus-tz-665p.jpg?v=1624086247673" alt="SET NỆM TRẺ EM NCZ-202 (GH&#201;P LẺ)" />
-                            </a>
-                            <div class="product-info">
-                                <a href="set-nem-tre-em-ncz-202-ghep-le.html" title="SET NỆM TRẺ EM NCZ-202 (GH&#201;P LẺ)" class="ant-item-product-name">SET NỆM TRẺ EM NCZ-202 (GH&#201;P LẺ)</a>
-                                <div class="product__price">
-
-
-                                    <span class="price">1.250.000₫</span>
-
-
-                                </div>
-                            </div>
-                            <form action="https://petshop.vn/cart/add" method="post" enctype="multipart/form-data" class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart" data-id="product-actions-22055507">
-
-
-                                <input type="hidden" name="variantId" value="47549271" />
-                                <a href="set-nem-tre-em-ncz-202-ghep-le.html" class="action add_to_cart cart-button" rel="nofollow" title="Mua ngay">Mua ngay</a>
-
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
     </section>
 }
 

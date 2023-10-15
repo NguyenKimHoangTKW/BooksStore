@@ -20,17 +20,23 @@ namespace BookStores.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Admin admin, Customer customer)
+        public ActionResult Login(UserAdmin admin, Customer customer, FormCollection f)
         {
-            var isLoginAdmin = db.Admins.SingleOrDefault(sa => sa.userName.Equals(admin.userName) && sa.passWord.Equals(admin.passWord));
+            var username = f["username"];
+            var password = f["password"];
+            var isLoginAdmin = db.UserAdmins.SingleOrDefault(sa => sa.userName.Equals(admin.userName) && sa.passWord.Equals(admin.passWord));
             var isLoginCustomer = db.Customers.SingleOrDefault(cus => cus.userName.Equals(customer.userName) && cus.passWord.Equals(customer.passWord));
             if(isLoginAdmin != null)
             {
+                admin.userName = username;
+                admin.passWord = password;
                 Session["Admin"] = isLoginAdmin;
                 return RedirectToAction("Index","Home", new {area = "Admin"});
             }
             else if(isLoginCustomer != null)
             {
+                customer.userName = username;
+                customer.passWord = password;
                 Session["Customer"] = isLoginCustomer;
                 return RedirectToAction("Index", "BookStore", new { area = "" });
             }
@@ -43,7 +49,7 @@ namespace BookStores.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(Customer cus)
+        public ActionResult Register(Customer cus, FormCollection f)
         {
             if (ModelState.IsValid)
             {
@@ -51,6 +57,8 @@ namespace BookStores.Controllers
                 cus.idCustomer = nextId;
                 cus.codeCustomer = "KH" + nextId.ToString("2023BS");
                 cus.creDate = DateTime.Now;
+                var password = f["Password"];
+                var checkpassword = f["CheckPassword"];
                 if (db.Customers.SingleOrDefault(c => c.userName == cus.userName) != null)
                 {
                     TempData["SweetAlertMessage"] = "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác";
@@ -62,8 +70,14 @@ namespace BookStores.Controllers
                     TempData["SweetAlertType"] = "error";
 
                 }
+                else if (password != checkpassword)
+                {
+                    TempData["SweetAlertMessage"] = "Mật khẩu nhập lại không đúng";
+                    TempData["SweetAlertType"] = "error";
+                }
                 else
                 {
+                    cus.passWord = password;
                     TempData["SweetAlertMessage"] = "Đăng ký thành công";
                     TempData["SweetAlertType"] = "success";
                     db.Customers.Add(cus);
@@ -85,6 +99,43 @@ namespace BookStores.Controllers
             }
             {
                 return 1;
+            }
+        }
+        [HttpGet]
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgetPassword(string username, string password, string confirmPassword)
+        {
+            // Tìm khách hàng theo email
+            var customer = db.Customers.SingleOrDefault(c => c.email == username);
+
+            if (customer != null)
+            {
+                if (password != confirmPassword)
+                {
+                    TempData["SweetAlertMessage"] = "Mật khẩu và mật khẩu xác nhận không khớp.";
+                    TempData["SweetAlertType"] = "error";
+                    return View();
+                }
+
+                customer.passWord = password;
+
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["SweetAlertMessage"] = "Mật khẩu đã được thay đổi thành công.";
+                TempData["SweetAlertType"] = "success";
+
+                return RedirectToAction("Login"); 
+            }
+            else
+            {
+                TempData["SweetAlertMessage"] = "Không tìm thấy khách hàng với email này.";
+                TempData["SweetAlertType"] = "error";
+                return View();
             }
         }
         public ActionResult Logout()

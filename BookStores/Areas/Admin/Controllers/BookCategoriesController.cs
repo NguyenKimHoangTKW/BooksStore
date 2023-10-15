@@ -148,9 +148,17 @@ namespace BookStores.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             BookCategory bookCategory = await db.BookCategories.FindAsync(id);
-            db.BookCategories.Remove(bookCategory);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (db.Books.Any(b => b.idBookCat == bookCategory.idBookCat))
+            {
+                ViewBag.ThongBao = "Không thể xóa vì bị trùng khóa ngoại bên Thể loại sách";
+            }
+            else
+            {
+                db.BookCategories.Remove(bookCategory);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(bookCategory);
         }
 
         protected override void Dispose(bool disposing)

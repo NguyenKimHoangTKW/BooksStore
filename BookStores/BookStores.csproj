@@ -144,21 +144,18 @@
     <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
     <Compile Include="Areas\Admin\Controllers\BookCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BooksController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserAdminsController.cs" />
     <Compile Include="Areas\Admin\Controllers\WriteBooksController.cs" />
     <Compile Include="Controllers\BookStoreController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Admin.cs">
-      <DependentUpon>BooksStoresModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Author.cs">
       <DependentUpon>BooksStoresModel.tt</DependentUpon>
@@ -201,6 +198,9 @@
       <DependentUpon>BooksStoresModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Topic.cs">
+      <DependentUpon>BooksStoresModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserAdmin.cs">
       <DependentUpon>BooksStoresModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WriteBook.cs">
@@ -761,6 +761,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\stylepage.css" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
@@ -1056,11 +1057,6 @@
     <Content Include="Areas\Admin\Views\WriteBooks\Details.cshtml" />
     <Content Include="Areas\Admin\Views\WriteBooks\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\WriteBooks\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
     <Content Include="Content\sweetalert\sweet-alert.less" />
     <Content Include="Content\sweetalert\sweet-alert-combine.less" />
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
@@ -1071,11 +1067,6 @@
     <Content Include="Areas\Admin\Views\BookCategories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BookCategories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BookCategories\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\OrderDetails\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\OrderDetails\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\OrderDetails\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\OrderDetails\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\OrderDetails\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
@@ -1084,6 +1075,20 @@
     <Content Include="Areas\Admin\Views\Orders\OrderInTransit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Error.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\OrderSuccessfully.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderDetailTransit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderNonPay.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderDetailNonPay.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmins\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmins\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmins\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmins\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmins\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1610,6 +1615,8 @@
     <Content Include="Views\Cart\OrderInTransitPatial.cshtml" />
     <Content Include="Views\Cart\OrderSuccessfullyPartial.cshtml" />
     <Content Include="Views\BookStore\GetAllBooks.cshtml" />
+    <Content Include="Views\BookStore\GetAllBooksByDefaul.cshtml" />
+    <Content Include="Views\Users\ForgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

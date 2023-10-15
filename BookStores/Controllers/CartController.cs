@@ -138,13 +138,13 @@ namespace BookStores.Controllers
             Order order = new Order();
             Customer customer = (Customer)Session["Customer"];
             List<Cart> lstCart = GetCarts();
-            order.codeOrder = "Order" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            order.codeOrder = "HĐ" + DateTime.Now.ToString("yyyyMMddHHmmss");
             order.idCustomer = customer.idCustomer;
             order.orderDate = DateTime.Now;
             TimeSpan threeDays = new TimeSpan(3, 0, 0, 0);
             order.deliveryDate = order.orderDate + threeDays;
             order.checkPay = false;
-            order.deliveryStatus = "Chưa xử lý";
+            order.deliveryStatus = "Đã tiếp nhận đơn hàng";
             db.Orders.Add(order);
             db.SaveChanges();
             foreach (var item in lstCart)
@@ -181,7 +181,7 @@ namespace BookStores.Controllers
             var lstorderdetail = from o in db.OrderDetails
                            where o.idOrder == id
                            select o;
-            return View(lstorderdetail);
+            return PartialView(lstorderdetail);
 
         }
         public ActionResult InfoOrderPartial(int? id)

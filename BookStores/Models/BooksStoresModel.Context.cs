@@ -25,7 +25,6 @@ namespace BookStores.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
@@ -34,7 +33,8 @@ namespace BookStores.Models
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<BookCategory> BookCategories { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<UserAdmin> UserAdmins { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -70,14 +70,11 @@
                             <td>@item.Customer.address</td>
 
                             <td class="text-right">
-                                <a href="/Admin/Orders/Edit?id=@item.idOrder">
-                                    <button class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
-                                        <i class="anticon anticon-edit"></i>
+                                <a href="/Admin/Orders/OrderDetail?id=@item.idOrder">
+                                    <button class="btn btn-info btn-tone m-r-5">
+                                        Xử lý
                                     </button>
                                 </a>
-                                <button class="btn btn-icon btn-hover btn-sm btn-rounded">
-                                    <i class="anticon anticon-delete"></i>
-                                </button>
                             </td>
                         </tr>
                     }

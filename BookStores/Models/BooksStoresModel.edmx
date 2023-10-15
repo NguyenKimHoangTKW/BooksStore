@@ -5,18 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbBookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="idAdmin" />
-          </Key>
-          <Property Name="idAdmin" Type="int" Nullable="false" />
-          <Property Name="codeAdmin" Type="char" MaxLength="13" Nullable="false" />
-          <Property Name="nameAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="access" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="idAuthor" />
@@ -82,10 +70,9 @@
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="idOrder" />
-            <PropertyRef Name="idBooks" />
           </Key>
           <Property Name="idOrder" Type="int" Nullable="false" />
-          <Property Name="idBooks" Type="int" Nullable="false" />
+          <Property Name="idBooks" Type="int" />
           <Property Name="quantity" Type="int" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
         </EntityType>
@@ -116,6 +103,18 @@
           <Property Name="idTopic" Type="int" Nullable="false" />
           <Property Name="codeTopic" Type="char" MaxLength="13" Nullable="false" />
           <Property Name="nameTopic" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAdmin">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="int" Nullable="false" />
+          <Property Name="codeAdmin" Type="char" MaxLength="13" Nullable="false" />
+          <Property Name="nameAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="passWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="access" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="WriteBook">
           <Key>
@@ -176,7 +175,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Books">
-          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Books">
@@ -189,7 +188,7 @@
         </Association>
         <Association Name="FK_OrderDetail_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="idOrder" />
@@ -224,7 +223,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbBookStoreModelStoreContainer">
-          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
@@ -234,6 +232,7 @@
           <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAdmin" EntityType="Self.UserAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WriteBook" EntityType="Self.WriteBook" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BookCategory_Topic" Association="Self.FK_BookCategory_Topic">
             <End Role="Topic" EntitySet="Topic" />
@@ -272,18 +271,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbBookStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="idAdmin" />
-          </Key>
-          <Property Name="idAdmin" Type="Int32" Nullable="false" />
-          <Property Name="codeAdmin" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="nameAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -295,7 +282,6 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="dbBookStoreEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Publishers" EntityType="dbBookStoreModel.Publisher" />
           <EntitySet Name="Authors" EntityType="dbBookStoreModel.Author" />
@@ -324,15 +310,16 @@
             <End Role="BookCategory" EntitySet="BookCategories" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
-          <EntitySet Name="OrderDetails" EntityType="dbBookStoreModel.OrderDetail" />
-          <AssociationSet Name="FK_OrderDetail_Books" Association="dbBookStoreModel.FK_OrderDetail_Books">
-            <End Role="Book" EntitySet="Books" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
           <EntitySet Name="Orders" EntityType="dbBookStoreModel.Order" />
           <AssociationSet Name="FK_Order_Customer" Association="dbBookStoreModel.FK_Order_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="UserAdmins" EntityType="dbBookStoreModel.UserAdmin" />
+          <EntitySet Name="OrderDetails" EntityType="dbBookStoreModel.OrderDetail" />
+          <AssociationSet Name="FK_OrderDetail_Books" Association="dbBookStoreModel.FK_OrderDetail_Books">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="dbBookStoreModel.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Orders" />
@@ -489,30 +476,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="idOrder" />
-            <PropertyRef Name="idBooks" />
-          </Key>
-          <Property Name="idOrder" Type="Int32" Nullable="false" />
-          <Property Name="idBooks" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <NavigationProperty Name="Book" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="OrderDetail" ToRole="Book" />
-          <NavigationProperty Name="Order" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK_OrderDetail_Books">
-          <End Type="dbBookStoreModel.Book" Role="Book" Multiplicity="1" />
-          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Book">
-              <PropertyRef Name="idBooks" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="idBooks" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="idOrder" />
@@ -525,7 +488,7 @@
           <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="idCustomer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="dbBookStoreModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="OrderDetails" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetail" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <Association Name="FK_Order_Customer">
           <End Type="dbBookStoreModel.Customer" Role="Customer" Multiplicity="1" />
@@ -539,9 +502,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserAdmin">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="Int32" Nullable="false" />
+          <Property Name="codeAdmin" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="nameAdmin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="passWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="access" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <Property Name="idBooks" Type="Int32" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="Book" Relationship="dbBookStoreModel.FK_OrderDetail_Books" FromRole="OrderDetail" ToRole="Book" />
+          <NavigationProperty Name="Order" Relationship="dbBookStoreModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderDetail_Books">
+          <End Type="dbBookStoreModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="idBooks" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idBooks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderDetail_Order">
           <End Type="dbBookStoreModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Type="dbBookStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="idOrder" />
@@ -557,19 +555,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbBookStoreModelStoreContainer" CdmEntityContainer="dbBookStoreEntities">
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="dbBookStoreModel.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
-                <ScalarProperty Name="codeAdmin" ColumnName="codeAdmin" />
-                <ScalarProperty Name="nameAdmin" ColumnName="nameAdmin" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="passWord" ColumnName="passWord" />
-                <ScalarProperty Name="access" ColumnName="access" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="dbBookStoreModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -666,16 +651,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="idBooks" ColumnName="idBooks" />
-                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="dbBookStoreModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -685,6 +660,29 @@
                 <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
                 <ScalarProperty Name="checkPay" ColumnName="checkPay" />
                 <ScalarProperty Name="codeOrder" ColumnName="codeOrder" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAdmins">
+            <EntityTypeMapping TypeName="dbBookStoreModel.UserAdmin">
+              <MappingFragment StoreEntitySet="UserAdmin">
+                <ScalarProperty Name="access" ColumnName="access" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="nameAdmin" ColumnName="nameAdmin" />
+                <ScalarProperty Name="codeAdmin" ColumnName="codeAdmin" />
+                <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="dbBookStoreModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idBooks" ColumnName="idBooks" />
                 <ScalarProperty Name="idOrder" ColumnName="idOrder" />
               </MappingFragment>
             </EntityTypeMapping>

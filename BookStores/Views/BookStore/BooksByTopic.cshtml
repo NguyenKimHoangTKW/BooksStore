@@ -1,75 +1,13 @@
-﻿@model IEnumerable<BookStores.Models.Book>
-    
+﻿@using BookStores.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Book>
 @{
     ViewBag.Title = "Trang Chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="awe-section-1">
-    <div class="home-slider swiper-container gallery-top">
-        <div class="swiper-wrapper">
+@Styles.Render("~/Content/Page/css")
 
-            <div class="swiper-slide">
-                <a href="#" class="clearfix" title="BookStore">
-                    <picture>
-                        <source media="(min-width: 1200px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
-                        <source media="(min-width: 992px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
-                        <source media="(min-width: 569px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
-                        <source media="(max-width: 567px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Bookstore.webp?1687579687145">
-
-                    </picture>
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#" class="clearfix" title="BookStore">
-                    <picture>
-                        <source media="(min-width: 1200px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
-                        <source media="(min-width: 992px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
-                        <source media="(min-width: 569px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
-                        <source media="(max-width: 567px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145">
-                        <img style="height: 500px;width: 100%;" src="~/Style/bizweb.dktcdnd.net/thumb/grande/100/147/060/themes/880570/assets/BookstoreHead.jpeg?1687579687145" alt="/" class="img-responsive center-block d-block mx-auto" />
-
-                    </picture>
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#" class="clearfix" title="BookStore">
-                    <picture>
-                        <source media="(min-width: 1200px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
-                        <source media="(min-width: 992px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
-                        <source media="(min-width: 569px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
-                        <source media="(max-width: 567px)"
-                                srcset="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145">
-                        <img style="height: 500px;width: 100%;" src="~/Style/bizweb.dktcdn.net/thumb/grande/100/147/060/themes/880570/assets/bookstoreshead2.jpg?1687579687145" alt="/" class="img-responsive center-block d-block mx-auto" />
-                    </picture>
-                </a>
-            </div>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-    <script>
-        var swiper = new Swiper('.home-slider', {
-            autoplay: {
-                delay: 4500,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            }
-        });</script>
-</section>
-<div class="container">
+<div class="container" style="margin-top:73px">
     <div class="bg-white">
         <section class="awe-section-1s">
             <div class="ant-categories row">
@@ -81,7 +19,15 @@
             <script src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/flipclockb828.js?1687579687145" type="text/javascript"></script>
             <div class="ant-block-product">
                 <div class="ant-block-product-title">
-                    <a class="ant-titles" href="san-pham-noi-bat.html" title="Sách nổi bật"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="Sách nổi bật " height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" />Sách </a>
+                    @if (Model.Any())
+                    {
+                        <a class="ant-titles" href="/" title="@Model.FirstOrDefault().BookCategory.Topic.nameTopic"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="@Model.FirstOrDefault().BookCategory.Topic.nameTopic " height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" />Chủ đề @Model.FirstOrDefault().BookCategory.Topic.nameTopic</a>
+                    }
+                    else
+                    {
+                <a class="ant-titles" href="/" title="Sách theo chủ đề"><img src="~/Style/bizweb.dktcdn.net/100/147/060/themes/880570/assets/Logo_Bookstore.png?1687579687145" alt="Sách theo chủ đề" height="64" width="64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" class="lazy img-responsive" />Sách theo chủ đề</a>
+
+                    }
                     <div class="timer">
                         <div class="time" data-countdown="countdown" data-date="12-25-2022-09-15-45"></div>
                     </div>
@@ -107,55 +53,23 @@
 
                                     </div>
                                 </div>
+                                <a href="@Url.Action("AddCart","Cart", new { ms = item.idBooks, url = Request.Url.ToString() })">
+                                    <button class="btn btn-success btn-tone m-r-5" style="height: 37px">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </a>
                                 <form class="group-buttons d-flex align-items-center justify-content-center variants form-nut-grid form-ajaxtocart">
-
-
-                                    <input type="hidden" name="variantId" value="60462122" />
-                                    <a href="/" class="action add_to_cart cart-button" rel="nofollow" title="Mua ngay">Mua ngay</a>
-
-
                                 </form>
                             </div>
                         </div>
                     }
                 </div>
+                <p style="text-align:right"><strong>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</strong></p>
+                <div class="pagination-container">
+                    @Html.PagedListPager(Model, page => Url.Action("BooksByTopic", new { id = ViewBag.idTopic, page = page }))
+                </div>
             </div>
     </div>
-    <script>
-        var swiper = new Swiper('.ant-similar-product-swiper', {
-            slidesPerView: 4,
-            spaceBetween: 15,
-            slidesPerGroup: 2,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                300: {
-                    slidesPerView: 2,
-                    spaceBetween: 7,
-                },
-                500: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                640: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 10,
-                },
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 15,
-                },
-                1200: {
-                    slidesPerView: 5,
-                    spaceBetween: 15,
-                }
-            }
-        });</script>
+
     </section>
 </div>

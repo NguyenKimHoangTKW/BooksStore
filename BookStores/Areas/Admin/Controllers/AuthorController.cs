@@ -133,9 +133,17 @@ namespace BookStores.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Author author = db.Authors.Find(id);
-            db.Authors.Remove(author);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if(db.WriteBooks.Any(x => x.idAuthor == author.idAuthor))
+            {
+                ViewBag.ThongBao = "Không thể xóa tác giả vì bị trùng khóa ngoại bên 'Người viết sách', vui lòng kiểm tra lại";
+            }
+            else
+            {
+                db.Authors.Remove(author);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(author);
         }
 
         protected override void Dispose(bool disposing)

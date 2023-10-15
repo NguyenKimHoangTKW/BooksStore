@@ -38,32 +38,28 @@ namespace BookStores.Areas.Admin.Controllers
             var orderintransit = from o in db.Orders
                            where o.deliveryStatus.Equals(intransit)
                            select o;
-            if (db.Orders.SingleOrDefault(x => x.deliveryStatus.Equals(intransit)) == null)
-            {
-                return RedirectToAction("Error", "Orders");
-            }
-            else
-            {
-                return View(orderintransit);
-            }
-            
+             return View(orderintransit);
+  
         }
         public ActionResult OrderSuccessfully()
         {
-            var successfully = "Giao hàng thành công";
-
-            var ordersuccessfully = from o in db.Orders
-                                    where o.deliveryStatus.Equals(successfully)
-                                    select o;
-            if (db.Orders.SingleOrDefault(x => x.deliveryStatus.Equals(successfully)) == null)
-            {
-                return RedirectToAction("Error", "Orders");
-            }
-            else
-            {
-                return View(ordersuccessfully);
-            }
-           
+            var intransit = "Giao hàng thành công";
+            var orderintransit = from o in db.Orders
+                                 where o.deliveryStatus.Equals(intransit)
+                                 select o;
+                return View(orderintransit);
+        }
+        public ActionResult OrderNonPay()
+        {
+            var orderintransit = from o in db.Orders
+                                 where o.checkPay == false
+                                 select o;
+            return View(orderintransit);
+        }
+        public ActionResult OrderDetailNonPay(int? id)
+        {
+            var lstorderbyid = db.OrderDetails.Where(o => o.idOrder == id).ToList();
+            return View(lstorderbyid);
         }
         public ActionResult Error()
         {
@@ -139,9 +135,17 @@ namespace BookStores.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Order order = await db.Orders.FindAsync(id);
-            db.Orders.Remove(order);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if(db.OrderDetails.Any(o => o.idOrder == order.idOrder))
+            {
+                ViewBag.ThongBao = "Không thể xóa hóa đơn, bạn vui lòng xóa chi tiết hóa đơn trước";
+            }
+            else
+            {
+                db.Orders.Remove(order);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(order);
         }
 
         protected override void Dispose(bool disposing)
@@ -151,6 +155,86 @@ namespace BookStores.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult OrderDetail(int? id)
+        {
+            var lstorderbyid = db.OrderDetails.Where(o => o.idOrder == id).ToList();
+            return View(lstorderbyid);
+        }
+        public ActionResult OrderDetailTransit(int? id)
+        {
+            var lstorderbyid = db.OrderDetails.Where(o => o.idOrder == id).ToList();
+            return View(lstorderbyid);
+        }
+        public async Task<ActionResult> OrderDetailEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Order order = db.Orders.Find(id);
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+
+ 
+            order.deliveryStatus = "Đang giao hàng";
+
+            db.Entry(order).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> OrderDetailSuccess(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Order order = db.Orders.Find(id);
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            order.deliveryStatus = "Giao hàng thành công";
+
+
+            db.Entry(order).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> OrderDetailSuccessPay(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Order order = db.Orders.Find(id);
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            order.checkPay = true;
+
+
+            db.Entry(order).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

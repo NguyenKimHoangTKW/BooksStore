@@ -1,49 +1,35 @@
 ﻿@model IEnumerable<BookStores.Models.OrderDetail>
 @{
     ViewBag.Title = "InfoOrderDetail";
-
+    int i = 0;
 }
-@{ var usercustomer = Session["Customer"] as BookStores.Models.Customer;}
-<div class="card" style="margin-top:75px;">
-    <div class="card-body">
-        
-        <div class="table-responsive">
-            <table class="table table-hover e-commerce-table">
-                <thead>
-                    <tr>
+<div class="order-details">
+    <h2>Chi tiết sản phẩm</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
 
-                        <th>Tên khách hàng</th>
-                        <th>Mã hóa đơn</th>
-                        <th>Ngày đặt</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-
-
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar avatar-image avatar-sm m-r-10">
-                                        <img src="~/Areas/Style/Images/ImagesBooks/@item.Book.Thumb" alt="" style="max-width: 60px">
-                                    </div>
-                                    <h6 class="m-b-0">@item.Book.nameBooks</h6>
-                                </div>
-                            </td>
-                            <td>@item.quantity</td>
-                            <td>@item.price</td>
-
-                        </tr>
-
-                    }
-                    <a href="@Url.Action("InfoOrder","Cart", new {id = usercustomer.idCustomer})">Quay về Thông tin đơn hàng</a>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                i++;
+                <tr>
+                    <td>#@i</td>
+                    <td><img src="~/Areas/Style/Images/ImagesBooks/@product.Book.Thumb" alt="" style="max-width: 60px"></td>
+                    <td>@product.Book.nameBooks</td>
+                    <td>@product.quantity</td>
+                    <td>@product.price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-
 
 
