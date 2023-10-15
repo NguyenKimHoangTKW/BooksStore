@@ -256,6 +256,7 @@
     <Content Include="Areas\Style\assets\images\others\coffee-app-thumb.jpg" />
     <Content Include="Areas\Style\assets\images\others\error-1.png" />
     <Content Include="Areas\Style\assets\images\others\error-2.png" />
+    <Content Include="Areas\Style\assets\images\others\Error111.jpg" />
     <Content Include="Areas\Style\assets\images\others\file-manager.png" />
     <Content Include="Areas\Style\assets\images\others\img-1.jpg" />
     <Content Include="Areas\Style\assets\images\others\img-10.jpg" />
